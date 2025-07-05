@@ -1,3 +1,4 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -95,4 +96,17 @@ body {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
+  /* Désactivation des animations lourdes sur mobile */
+  /* Note: La plupart des animations sont masquées via la logique JSX dans Hero.tsx
+     avec `hidden md:block`. Si des éléments restants avaient des animations,
+     on pourrait utiliser `animation-play-state: paused !important;` ici. */
+  /* Exemple :
+  .element-with-float-animation {
+    animation: none !important;
+  }
+  .element-with-scan-animation {
+    animation: none !important;
+  }
+  */
 }

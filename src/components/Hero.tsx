@@ -5,14 +5,22 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
-  
+
+  // Définition des chaînes de code à afficher, en utilisant des entités numériques pour les caractères spéciaux
+  const codeLine1 = "import React from 'react';";
+  // Utilisation d'entités numériques pour { et }
+  const codeLine2 = "function App() {"; 
+  // Utilisation d'entités HTML pour < et >
+  const codeLine3 = "return <div>Hello</div>";
+  const codeLine4 = "}"; // Entité numérique pour }
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Enhanced Background with Terminal Style */}
+      {/* Arrière-plan amélioré avec style Terminal */}
       <div className="absolute inset-0 bg-black">
-        {/* Subtle Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-5"
+        {/* Motif de grille subtil - Conservé car léger */}
+        <div
+          className="absolute inset-0 opacity-5 hidden md:block"
           style={{
             backgroundImage: `
               linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
@@ -21,17 +29,15 @@ export const Hero: React.FC = () => {
             backgroundSize: '50px 50px'
           }}
         />
-        
-        {/* Terminal Windows */}
-        <div className="absolute top-10 left-10 w-80 h-48 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm">
-          {/* Terminal Header */}
+
+        {/* Fenêtres Terminal - Masquées sur mobile */}
+        <div className="absolute top-10 left-10 w-80 h-48 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm hidden md:block">
           <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/30">
             <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
             <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
             <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
             <span className="text-gray-400 text-xs ml-2 font-mono">terminal</span>
           </div>
-          {/* Terminal Content */}
           <div className="p-3 font-mono text-xs text-green-400/60 space-y-1">
             <div>$ npm install react</div>
             <div>$ git commit -m "feat: new component"</div>
@@ -39,9 +45,9 @@ export const Hero: React.FC = () => {
             <div className="text-cyan-400/60">✓ Build successful</div>
           </div>
         </div>
-        
-        {/* Second Terminal Window */}
-        <div className="absolute bottom-20 right-10 w-72 h-40 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm">
+
+        {/* Deuxième fenêtre Terminal - Masquée sur mobile */}
+        <div className="absolute bottom-20 right-10 w-72 h-40 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm hidden md:block">
           <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/30">
             <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
             <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
@@ -55,25 +61,26 @@ export const Hero: React.FC = () => {
             <div className="animate-pulse">█</div>
           </div>
         </div>
-        
-        {/* Code Editor Window */}
-        <div className="absolute top-1/2 left-5 w-64 h-32 bg-gray-900/15 border border-gray-700/20 rounded-lg backdrop-blur-sm transform -translate-y-1/2">
+
+        {/* Fenêtre Éditeur de code - Masquée sur mobile */}
+        <div className="absolute top-1/2 left-5 w-64 h-32 bg-gray-900/15 border border-gray-700/20 rounded-lg backdrop-blur-sm transform -translate-y-1/2 hidden md:block">
           <div className="flex items-center gap-2 px-3 py-1 border-b border-gray-700/20">
             <div className="w-2 h-2 rounded-full bg-red-500/50"></div>
             <div className="w-2 h-2 rounded-full bg-yellow-500/50"></div>
             <div className="w-2 h-2 rounded-full bg-green-500/50"></div>
             <span className="text-gray-500 text-xs ml-1 font-mono">App.tsx</span>
           </div>
+          {/* Affichage du code en utilisant les variables définies */}
           <div className="p-2 font-mono text-xs space-y-1">
-            <div className="text-purple-400/50">import React from 'react';</div>
-            <div className="text-cyan-400/50">function App() &lbrace;</div>
-            <div className="text-green-400/50 ml-2">return &lt;div&gt;Hello&lt;/div&gt;</div>
-            <div className="text-cyan-400/50">&rbrace;</div>
+            <div className="text-purple-400/50">{codeLine1}</div>
+            <div className="text-cyan-400/50">{codeLine2}</div>
+            <div className="text-green-400/50 ml-2">{codeLine3}</div>
+            <div className="text-cyan-400/50">{codeLine4}</div>
           </div>
         </div>
-        
-        {/* Code Brackets */}
-        <div className="absolute inset-0">
+
+        {/* Crochets de code - Masqués sur mobile */}
+        <div className="absolute inset-0 hidden md:block">
           {[
             { text: '</>', x: '15%', y: '20%' },
             { text: '{}', x: '85%', y: '15%' },
@@ -96,9 +103,9 @@ export const Hero: React.FC = () => {
             </div>
           ))}
         </div>
-        
-        {/* Code Keywords */}
-        <div className="absolute inset-0">
+
+        {/* Mots-clés de code - Masqués sur mobile */}
+        <div className="absolute inset-0 hidden md:block">
           {[
             { text: 'const', x: '25%', y: '30%' },
             { text: 'function', x: '70%', y: '25%' },
@@ -121,9 +128,9 @@ export const Hero: React.FC = () => {
             </div>
           ))}
         </div>
-        
-        {/* Terminal Commands */}
-        <div className="absolute inset-0">
+
+        {/* Commandes Terminal - Masquées sur mobile */}
+        <div className="absolute inset-0 hidden md:block">
           {[
             { text: '$ npm run dev', x: '12%', y: '35%' },
             { text: '$ git push', x: '82%', y: '30%' },
@@ -144,9 +151,9 @@ export const Hero: React.FC = () => {
             </div>
           ))}
         </div>
-        
-        {/* Operators */}
-        <div className="absolute inset-0">
+
+        {/* Opérateurs - Masqués sur mobile */}
+        <div className="absolute inset-0 hidden md:block">
           {[
             { text: ';', x: '35%', y: '25%' },
             { text: '=>', x: '60%', y: '35%' },
@@ -169,17 +176,17 @@ export const Hero: React.FC = () => {
             </div>
           ))}
         </div>
-        
-        {/* Scanning Lines */}
-        <div className="absolute inset-0">
-          <div 
+
+        {/* Lignes de scan - Masquées sur mobile */}
+        <div className="absolute inset-0 hidden md:block">
+          <div
             className="absolute w-full h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
             style={{
               animation: 'scanCode 15s linear infinite',
               top: '50%'
             }}
           />
-          <div 
+          <div
             className="absolute w-full h-px bg-gradient-to-r from-transparent via-green-400/15 to-transparent"
             style={{
               animation: 'scanCode 20s linear infinite reverse',
@@ -188,32 +195,29 @@ export const Hero: React.FC = () => {
           />
         </div>
       </div>
-      
-      <div 
+
+      {/* Contenu principal */}
+      <div
         ref={elementRef}
         className={`container mx-auto px-4 text-center relative z-10 transform transition-all duration-1000 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}
       >
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Clean Main Title */}
-          <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent font-mono tracking-tight">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:9xl font-bold bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent font-mono tracking-tight">
             {t.heroTitle}
           </h1>
-          
-          {/* Simple Subtitle */}
+
           <div className="text-xl md:text-2xl text-cyan-400 font-light tracking-widest">
             {t.heroSubtitle}
           </div>
-          
-          {/* Clean Description */}
-          <p className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto">
+
+          <p className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto px-4">
             {t.heroDescription}
           </p>
-          
-          {/* Single CTA Button */}
+
           <div className="pt-8">
-            <button className="px-12 py-4 bg-white text-black hover:bg-cyan-400 hover:text-black font-medium text-lg transition-all duration-300 rounded-sm tracking-wide">
+            <button className="px-8 py-3 sm:px-10 sm:py-3 text-lg sm:text-xl bg-white text-black hover:bg-cyan-400 hover:text-black font-medium transition-all duration-300 rounded-sm tracking-wide">
               {t.getQuote}
             </button>
           </div>

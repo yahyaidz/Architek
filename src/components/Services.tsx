@@ -7,7 +7,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 export const Services: React.FC = () => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
-  
+
   const services = [
     {
       title: t.webDevelopment,
@@ -31,16 +31,16 @@ export const Services: React.FC = () => {
       delay: 400
     }
   ];
-  
+
   return (
     <section id="services" className="py-20 relative overflow-hidden">
-      {/* Background */}
+      {/* Arrière-plan */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5"></div>
       </div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
-        <div 
+        <div
           ref={elementRef}
           className={`text-center mb-16 transform transition-all duration-1000 ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
@@ -49,12 +49,13 @@ export const Services: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {t.services}
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto px-4"> {/* Ajout de px-4 */}
             {t.aboutDescription}
           </p>
         </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
+
+        {/* Grille mise à jour pour la réactivité */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> {/* Par défaut sur 1 colonne, 3 sur écrans moyens */}
           {services.map((service, index) => (
             <ServiceCard
               key={index}
@@ -62,9 +63,10 @@ export const Services: React.FC = () => {
             />
           ))}
         </div>
-        
-        {/* Technology Icons */}
-        <div className="mt-16 flex justify-center gap-8 flex-wrap">
+
+        {/* Icônes Technologiques */}
+        {/* Assurez-vous que ce conteneur flex s'enroule bien */}
+        <div className="mt-16 flex justify-center gap-8 flex-wrap text-center">
           <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
             <Wordpress size={32} />
             <span className="text-sm">WordPress</span>

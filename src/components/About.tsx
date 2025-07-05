@@ -5,29 +5,30 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 export const About: React.FC = () => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
-  
+
   return (
     <section id="about" className="py-20 relative overflow-hidden">
-      {/* Background */}
+      {/* Arrière-plan */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-purple-900">
         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-10"></div>
       </div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
-        <div 
+        <div
           ref={elementRef}
           className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 px-4"> {/* Ajout de px-4 */}
             {t.aboutTitle}
           </h2>
-          <p className="text-gray-300 text-lg leading-relaxed mb-12">
+          <p className="text-gray-300 text-lg leading-relaxed mb-12 px-4"> {/* Ajout de px-4 */}
             {t.aboutDescription}
           </p>
-          
-          <div className="grid md:grid-cols-3 gap-8">
+
+          {/* Grille mise à jour pour la réactivité */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4"> {/* Par défaut sur 1 colonne, 3 sur écrans moyens, ajout de px-4 */}
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
               <div className="text-3xl font-bold text-pink-400 mb-2">150+</div>
               <div className="text-gray-300">Active Clients</div>
