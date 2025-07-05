@@ -1,0 +1,2602 @@
+Exploration du projet à partir de: /home/yahyaidzman/PycharmProjects/Architek
+
+Dossiers ignorés: venv, .git, __pycache__, .idea, node_modules, dist
+Fichiers ignorés: package-lock.json
+Extensions ignorées: 
+
+
+package.json :
+----------------------------------------
+{
+  "name": "vite-react-typescript-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.344.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "globals": "^15.9.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.3.0",
+    "vite": "^5.4.2"
+  }
+}
+
+
+
+tsconfig.app.json :
+----------------------------------------
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+
+
+
+tailwind.config.js :
+----------------------------------------
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+
+
+tsconfig.node.json :
+----------------------------------------
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+
+
+vite.config.ts :
+----------------------------------------
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  optimizeDeps: {
+    exclude: ['lucide-react'],
+  },
+});
+
+
+
+postcss.config.js :
+----------------------------------------
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+
+
+eslint.config.js :
+----------------------------------------
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(
+  { ignores: ['dist'] },
+  {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
+  }
+);
+
+
+
+tsconfig.json :
+----------------------------------------
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+
+
+
+.gitignore :
+----------------------------------------
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
+
+
+
+index.html :
+----------------------------------------
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Runner - Digital Agency</title>
+    <meta name="description" content="Web Runner - Your digital agency in Lyon and Paris. Specialized in web development, SEO, and community management." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
+src/App.tsx :
+----------------------------------------
+import React from 'react';
+import { Header } from './components/Header';
+import { Hero } from './components/Hero';
+import { Services } from './components/Services';
+import { About } from './components/About';
+import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
+
+function App() {
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      <Hero />
+      <Services />
+      <About />
+      <Contact />
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
+
+
+src/main.tsx :
+----------------------------------------
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+
+
+
+src/vite-env.d.ts :
+----------------------------------------
+/// <reference types="vite/client" />
+
+
+
+src/components/About.tsx :
+----------------------------------------
+import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+export const About: React.FC = () => {
+  const { t } = useLanguage();
+  const { elementRef, isVisible } = useScrollAnimation();
+  
+  return (
+    <section id="about" className="py-20 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-purple-900">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-10"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div 
+          ref={elementRef}
+          className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+            {t.aboutTitle}
+          </h2>
+          <p className="text-gray-300 text-lg leading-relaxed mb-12">
+            {t.aboutDescription}
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
+              <div className="text-3xl font-bold text-pink-400 mb-2">150+</div>
+              <div className="text-gray-300">Active Clients</div>
+            </div>
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-cyan-500/50 transition-all">
+              <div className="text-3xl font-bold text-cyan-400 mb-2">5+</div>
+              <div className="text-gray-300">Years Experience</div>
+            </div>
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-purple-500/50 transition-all">
+              <div className="text-3xl font-bold text-purple-400 mb-2">24/7</div>
+              <div className="text-gray-300">Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+src/components/Contact.tsx :
+----------------------------------------
+import React from 'react';
+import { MapPin, Phone, Mail, Instagram, Linkedin, Facebook, Youtube } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+export const Contact: React.FC = () => {
+  const { t } = useLanguage();
+  const { elementRef, isVisible } = useScrollAnimation();
+  
+  return (
+    <section id="contact" className="py-20 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div 
+          ref={elementRef}
+          className={`transform transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Lyon Office */}
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
+              <h3 className="text-pink-400 font-bold mb-4 text-lg">{t.lyonOffice}</h3>
+              <div className="text-2xl font-bold text-white mb-4">WEB RUNNER</div>
+              <div className="text-gray-300 mb-2">57 Place de la République</div>
+              <div className="text-gray-300 mb-4">69002 LYON</div>
+              <div className="flex items-center gap-2 text-white">
+                <Phone size={16} />
+                <span>04 72 54 71 01</span>
+              </div>
+            </div>
+            
+            {/* Paris Office */}
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-cyan-500/50 transition-all">
+              <h3 className="text-cyan-400 font-bold mb-4 text-lg">{t.parisOffice}</h3>
+              <div className="text-2xl font-bold text-white mb-4">WEB RUNNER</div>
+              <div className="text-gray-300 mb-2">58 Rue de Monceau</div>
+              <div className="text-gray-300 mb-4">75008 PARIS</div>
+              <div className="flex items-center gap-2 text-white">
+                <Phone size={16} />
+                <span>01 88 90 75 08</span>
+              </div>
+            </div>
+            
+            {/* Our Solutions */}
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-purple-500/50 transition-all">
+              <h3 className="text-purple-400 font-bold mb-4 text-lg">{t.ourSolutions}</h3>
+              <div className="space-y-2 text-gray-300">
+                <div>{t.webDesign}</div>
+                <div>{t.googleSeo}</div>
+                <div>{t.communityMgmt}</div>
+                <div>{t.virtualTour}</div>
+                <div>{t.virtualReality}</div>
+              </div>
+            </div>
+            
+            {/* Follow Us */}
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
+              <h3 className="text-pink-400 font-bold mb-4 text-lg">{t.followUs}</h3>
+              <div className="flex gap-4 mb-4">
+                <Instagram className="text-pink-400 hover:text-pink-300 cursor-pointer transition-colors" size={24} />
+                <Linkedin className="text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors" size={24} />
+                <Facebook className="text-blue-400 hover:text-blue-300 cursor-pointer transition-colors" size={24} />
+                <Youtube className="text-red-400 hover:text-red-300 cursor-pointer transition-colors" size={24} />
+              </div>
+              <div className="text-gray-300 text-sm mb-4">{t.dontMiss}</div>
+              <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg font-medium w-full transition-all">
+                {t.getQuote}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+src/components/Footer.tsx :
+----------------------------------------
+import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
+
+export const Footer: React.FC = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <footer className="py-8 bg-black border-t border-gray-800">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex gap-6 text-gray-400 text-sm">
+            <a href="#" className="hover:text-white transition-colors">{t.clientWork}</a>
+            <a href="#" className="hover:text-white transition-colors">{t.digitalTips}</a>
+            <a href="#" className="hover:text-white transition-colors">{t.contact}</a>
+            <a href="#" className="hover:text-white transition-colors">{t.legalMentions}</a>
+            <a href="#" className="hover:text-white transition-colors">{t.privacy}</a>
+          </div>
+          
+          <div className="text-gray-400 text-sm">
+            {t.copyright}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+
+src/components/Header.tsx :
+----------------------------------------
+import React, { useState } from 'react';
+import { Menu, X, Phone } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
+
+export const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
+  
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-pink-500/20">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+              WEB RUNNER
+            </div>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="#home" className="text-white hover:text-pink-400 transition-colors">
+              {t.home}
+            </a>
+            <a href="#services" className="text-white hover:text-pink-400 transition-colors">
+              {t.services}
+            </a>
+            <a href="#about" className="text-white hover:text-pink-400 transition-colors">
+              {t.about}
+            </a>
+            <a href="#contact" className="text-white hover:text-pink-400 transition-colors">
+              {t.contact}
+            </a>
+          </nav>
+          
+          {/* Contact */}
+          <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center gap-2 text-white text-sm">
+              <Phone size={16} />
+              <span>{t.phone}</span>
+            </div>
+            <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg font-medium transition-all transform hover:scale-105">
+              {t.getQuote}
+            </button>
+          </div>
+          
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-white hover:text-pink-400 transition-colors"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+        
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-pink-500/20">
+            <nav className="flex flex-col gap-4 mt-4">
+              <a href="#home" className="text-white hover:text-pink-400 transition-colors">
+                {t.home}
+              </a>
+              <a href="#services" className="text-white hover:text-pink-400 transition-colors">
+                {t.services}
+              </a>
+              <a href="#about" className="text-white hover:text-pink-400 transition-colors">
+                {t.about}
+              </a>
+              <a href="#contact" className="text-white hover:text-pink-400 transition-colors">
+                {t.contact}
+              </a>
+              <div className="flex items-center gap-2 text-white text-sm mt-4">
+                <Phone size={16} />
+                <span>{t.phone}</span>
+              </div>
+              <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg font-medium w-fit">
+                {t.getQuote}
+              </button>
+            </nav>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
+
+
+src/components/Hero.tsx :
+----------------------------------------
+import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+export const Hero: React.FC = () => {
+  const { t } = useLanguage();
+  const { elementRef, isVisible } = useScrollAnimation();
+  
+  return (
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Enhanced Background with Terminal Style */}
+      <div className="absolute inset-0 bg-black">
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        
+        {/* Terminal Windows */}
+        <div className="absolute top-10 left-10 w-80 h-48 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm">
+          {/* Terminal Header */}
+          <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/30">
+            <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
+            <span className="text-gray-400 text-xs ml-2 font-mono">terminal</span>
+          </div>
+          {/* Terminal Content */}
+          <div className="p-3 font-mono text-xs text-green-400/60 space-y-1">
+            <div>$ npm install react</div>
+            <div>$ git commit -m "feat: new component"</div>
+            <div>$ npm run build</div>
+            <div className="text-cyan-400/60">✓ Build successful</div>
+          </div>
+        </div>
+        
+        {/* Second Terminal Window */}
+        <div className="absolute bottom-20 right-10 w-72 h-40 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm">
+          <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/30">
+            <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
+            <span className="text-gray-400 text-xs ml-2 font-mono">bash</span>
+          </div>
+          <div className="p-3 font-mono text-xs text-purple-400/60 space-y-1">
+            <div>$ cd web-runner</div>
+            <div>$ npm start</div>
+            <div className="text-cyan-400/60">Server running on port 3000</div>
+            <div className="animate-pulse">█</div>
+          </div>
+        </div>
+        
+        {/* Code Editor Window */}
+        <div className="absolute top-1/2 left-5 w-64 h-32 bg-gray-900/15 border border-gray-700/20 rounded-lg backdrop-blur-sm transform -translate-y-1/2">
+          <div className="flex items-center gap-2 px-3 py-1 border-b border-gray-700/20">
+            <div className="w-2 h-2 rounded-full bg-red-500/50"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500/50"></div>
+            <span className="text-gray-500 text-xs ml-1 font-mono">App.tsx</span>
+          </div>
+          <div className="p-2 font-mono text-xs space-y-1">
+            <div className="text-purple-400/50">import React from 'react';</div>
+            <div className="text-cyan-400/50">function App() &lbrace;</div>
+            <div className="text-green-400/50 ml-2">return &lt;div&gt;Hello&lt;/div&gt;</div>
+            <div className="text-cyan-400/50">&rbrace;</div>
+          </div>
+        </div>
+        
+        {/* Code Brackets */}
+        <div className="absolute inset-0">
+          {[
+            { text: '</>', x: '15%', y: '20%' },
+            { text: '{}', x: '85%', y: '15%' },
+            { text: '[]', x: '20%', y: '80%' },
+            { text: '()', x: '80%', y: '75%' },
+            { text: '<div>', x: '8%', y: '60%' },
+            { text: '</div>', x: '90%', y: '45%' }
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="absolute text-cyan-400/15 text-2xl font-mono"
+              style={{
+                left: item.x,
+                top: item.y,
+                animation: `floatBracket ${8 + i}s ease-in-out infinite`,
+                animationDelay: `${i * 2}s`
+              }}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        
+        {/* Code Keywords */}
+        <div className="absolute inset-0">
+          {[
+            { text: 'const', x: '25%', y: '30%' },
+            { text: 'function', x: '70%', y: '25%' },
+            { text: 'return', x: '30%', y: '70%' },
+            { text: 'import', x: '65%', y: '65%' },
+            { text: 'export', x: '18%', y: '45%' },
+            { text: 'async', x: '78%', y: '55%' }
+          ].map((item, i) => (
+            <div
+              key={`code-${i}`}
+              className="absolute text-purple-400/12 text-sm font-mono"
+              style={{
+                left: item.x,
+                top: item.y,
+                animation: `floatBracket ${10 + i}s ease-in-out infinite`,
+                animationDelay: `${i * 1.5}s`
+              }}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        
+        {/* Terminal Commands */}
+        <div className="absolute inset-0">
+          {[
+            { text: '$ npm run dev', x: '12%', y: '35%' },
+            { text: '$ git push', x: '82%', y: '30%' },
+            { text: '$ yarn build', x: '22%', y: '65%' },
+            { text: '$ code .', x: '72%', y: '70%' }
+          ].map((item, i) => (
+            <div
+              key={`terminal-${i}`}
+              className="absolute text-green-400/10 text-xs font-mono"
+              style={{
+                left: item.x,
+                top: item.y,
+                animation: `floatBracket ${12 + i}s ease-in-out infinite`,
+                animationDelay: `${i * 3}s`
+              }}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        
+        {/* Operators */}
+        <div className="absolute inset-0">
+          {[
+            { text: ';', x: '35%', y: '25%' },
+            { text: '=>', x: '60%', y: '35%' },
+            { text: '&&', x: '40%', y: '75%' },
+            { text: '||', x: '55%', y: '80%' },
+            { text: '===', x: '28%', y: '50%' },
+            { text: '!==', x: '68%', y: '40%' }
+          ].map((item, i) => (
+            <div
+              key={`operator-${i}`}
+              className="absolute text-pink-400/12 text-lg font-mono"
+              style={{
+                left: item.x,
+                top: item.y,
+                animation: `floatBracket ${9 + i}s ease-in-out infinite`,
+                animationDelay: `${i * 2.5}s`
+              }}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        
+        {/* Scanning Lines */}
+        <div className="absolute inset-0">
+          <div 
+            className="absolute w-full h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
+            style={{
+              animation: 'scanCode 15s linear infinite',
+              top: '50%'
+            }}
+          />
+          <div 
+            className="absolute w-full h-px bg-gradient-to-r from-transparent via-green-400/15 to-transparent"
+            style={{
+              animation: 'scanCode 20s linear infinite reverse',
+              top: '30%'
+            }}
+          />
+        </div>
+      </div>
+      
+      <div 
+        ref={elementRef}
+        className={`container mx-auto px-4 text-center relative z-10 transform transition-all duration-1000 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}
+      >
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* Clean Main Title */}
+          <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent font-mono tracking-tight">
+            {t.heroTitle}
+          </h1>
+          
+          {/* Simple Subtitle */}
+          <div className="text-xl md:text-2xl text-cyan-400 font-light tracking-widest">
+            {t.heroSubtitle}
+          </div>
+          
+          {/* Clean Description */}
+          <p className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto">
+            {t.heroDescription}
+          </p>
+          
+          {/* Single CTA Button */}
+          <div className="pt-8">
+            <button className="px-12 py-4 bg-white text-black hover:bg-cyan-400 hover:text-black font-medium text-lg transition-all duration-300 rounded-sm tracking-wide">
+              {t.getQuote}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+src/components/ServiceCard.tsx :
+----------------------------------------
+import React from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useLanguage } from '../hooks/useLanguage';
+
+interface ServiceCardProps {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  gradient: string;
+  delay?: number;
+}
+
+export const ServiceCard: React.FC<ServiceCardProps> = ({
+  title,
+  description,
+  icon,
+  gradient,
+  delay = 0
+}) => {
+  const { elementRef, isVisible } = useScrollAnimation();
+  const { t } = useLanguage();
+  
+  return (
+    <div 
+      ref={elementRef}
+      className={`transform transition-all duration-1000 ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all duration-300 group hover:transform hover:scale-105">
+        <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+          {icon}
+        </div>
+        
+        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-pink-400 transition-colors">
+          {title}
+        </h3>
+        
+        <p className="text-gray-300 mb-6 leading-relaxed">
+          {description}
+        </p>
+        
+        <div className="flex gap-4">
+          <button className="px-6 py-2 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium">
+            {t.learnMore}
+          </button>
+          <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium">
+            {t.getQuote}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+src/components/Services.tsx :
+----------------------------------------
+import React from 'react';
+import { Code, Search, Users, WholeWord as Wordpress, FileSymlink as Html5, Rss as Css3 } from 'lucide-react';
+import { ServiceCard } from './ServiceCard';
+import { useLanguage } from '../hooks/useLanguage';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+export const Services: React.FC = () => {
+  const { t } = useLanguage();
+  const { elementRef, isVisible } = useScrollAnimation();
+  
+  const services = [
+    {
+      title: t.webDevelopment,
+      description: t.webDevelopmentDesc,
+      icon: <Code className="text-white" size={24} />,
+      gradient: 'from-purple-500 to-pink-500',
+      delay: 0
+    },
+    {
+      title: t.seoSea,
+      description: t.seoSeaDesc,
+      icon: <Search className="text-white" size={24} />,
+      gradient: 'from-cyan-500 to-blue-500',
+      delay: 200
+    },
+    {
+      title: t.communityManagement,
+      description: t.communityManagementDesc,
+      icon: <Users className="text-white" size={24} />,
+      gradient: 'from-pink-500 to-red-500',
+      delay: 400
+    }
+  ];
+  
+  return (
+    <section id="services" className="py-20 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div 
+          ref={elementRef}
+          className={`text-center mb-16 transform transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            {t.services}
+          </h2>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            {t.aboutDescription}
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={index}
+              {...service}
+            />
+          ))}
+        </div>
+        
+        {/* Technology Icons */}
+        <div className="mt-16 flex justify-center gap-8 flex-wrap">
+          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Wordpress size={32} />
+            <span className="text-sm">WordPress</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Html5 size={32} />
+            <span className="text-sm">HTML5</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Css3 size={32} />
+            <span className="text-sm">CSS3</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Code size={32} />
+            <span className="text-sm">PHP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+src/hooks/useLanguage.ts :
+----------------------------------------
+import { translations } from '../data/translations';
+
+export const useLanguage = () => {
+  return { 
+    t: translations,
+    isRTL: false,
+    currentLanguage: 'en'
+  };
+};
+
+
+src/hooks/useScrollAnimation.ts :
+----------------------------------------
+import { useEffect, useRef, useState } from 'react';
+
+export const useScrollAnimation = (threshold = 0.1) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold }
+    );
+    
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+    
+    return () => {
+      if (elementRef.current) {
+        observer.unobserve(elementRef.current);
+      }
+    };
+  }, [threshold]);
+  
+  return { elementRef, isVisible };
+};
+
+
+src/types/index.ts :
+----------------------------------------
+export interface Language {
+  code: string;
+  name: string;
+  direction: 'ltr' | 'rtl';
+}
+
+export interface Translation {
+  // Navigation
+  menu: string;
+  home: string;
+  services: string;
+  about: string;
+  contact: string;
+  
+  // Header
+  phone: string;
+  getQuote: string;
+  
+  // Hero Section
+  heroTitle: string;
+  heroSubtitle: string;
+  heroDescription: string;
+  
+  // Services
+  webDevelopment: string;
+  webDevelopmentDesc: string;
+  seoSea: string;
+  seoSeaDesc: string;
+  communityManagement: string;
+  communityManagementDesc: string;
+  learnMore: string;
+  
+  // About
+  aboutTitle: string;
+  aboutDescription: string;
+  clientsCount: string;
+  
+  // Contact
+  contactTitle: string;
+  contactDescription: string;
+  lyonOffice: string;
+  parisOffice: string;
+  ourSolutions: string;
+  followUs: string;
+  dontMiss: string;
+  
+  // Footer
+  webDesign: string;
+  googleSeo: string;
+  communityMgmt: string;
+  virtualTour: string;
+  virtualReality: string;
+  clientWork: string;
+  digitalTips: string;
+  legalMentions: string;
+  privacy: string;
+  copyright: string;
+}
+
+
+src/data/translations.ts :
+----------------------------------------
+export const translations = {
+  menu: 'MENU',
+  home: 'Home',
+  services: 'Services',
+  about: 'About',
+  contact: 'Contact',
+  
+  phone: '04 72 54 71 01',
+  getQuote: 'GET A QUOTE',
+  
+  heroTitle: 'WEB RUNNER',
+  heroSubtitle: 'AGENCY 360',
+  heroDescription: 'YOUR DIGITAL AGENCY IN LYON AND PARIS!',
+  
+  webDevelopment: 'CUSTOM WEB DEVELOPMENT',
+  webDevelopmentDesc: 'Web Runner agency specializes in creating custom WordPress websites and e-commerce solutions in Lyon and Paris with over 150 active clients.',
+  seoSea: 'SEO & SEA OPTIMIZATION',
+  seoSeaDesc: 'Our web agency also specializes in natural SEO referencing as well as paid SEA referencing and also referencing on AI assistants.',
+  communityManagement: 'TRUST US WITH YOUR COMMUNITY MANAGEMENT',
+  communityManagementDesc: 'Web Runner agency handles social media management for businesses and freelance professionals.',
+  learnMore: 'LEARN MORE',
+  
+  aboutTitle: 'About Web Runner',
+  aboutDescription: 'We are a digital agency committed to helping businesses grow online through innovative web solutions.',
+  clientsCount: '150+ active clients',
+  
+  contactTitle: 'Contact Us',
+  contactDescription: 'Ready to start your project? Get in touch with our team.',
+  lyonOffice: 'LYON OFFICE',
+  parisOffice: 'PARIS OFFICE',
+  ourSolutions: 'OUR SOLUTIONS',
+  followUs: 'FOLLOW US!',
+  dontMiss: 'Don\'t miss the latest news!',
+  
+  webDesign: 'Website Creation',
+  googleSeo: 'Google SEO',
+  communityMgmt: 'Community Management',
+  virtualTour: '360° Virtual Tour',
+  virtualReality: 'Virtual Reality',
+  clientWork: 'CLIENT WORK',
+  digitalTips: 'DIGITAL TIPS',
+  legalMentions: 'LEGAL MENTIONS',
+  privacy: 'PRIVACY',
+  copyright: 'COPYRIGHT 2025 © AC CONSULTANTS'
+};
+
+
+src/index.css :
+----------------------------------------
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #ec4899);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #be185d);
+}
+
+/* Minimal Animations */
+@keyframes floatBracket {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.4;
+  }
+}
+
+@keyframes scanCode {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Backdrop blur support */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Hover effects */
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+
+test.py :
+----------------------------------------
+import os
+
+# Chemin du répertoire courant
+racine = '.'
+
+# Nom du fichier de sortie
+fichier_sortie = 'resultat.txt'
+
+# Dossiers à ignorer
+dossiers_a_ignorer = ['venv', '.git', '__pycache__', '.idea', 'node_modules', 'dist']
+
+# Fichiers à ignorer (par nom ou extension)
+fichiers_a_ignorer = [
+    'package-lock.json',  # Fichiers spécifiques à ignorer
+
+]
+
+# Extensions de fichiers à ignorer
+extensions_a_ignorer = [
+]
+
+# Compteurs pour le débogage
+fichiers_traites = 0
+fichiers_ignores = 0
+
+# Fonction pour vérifier si un fichier doit être ignoré
+def doit_ignorer_fichier(nom_fichier):
+    # Vérifier si le nom du fichier est dans la liste des fichiers à ignorer
+    if nom_fichier in fichiers_a_ignorer:
+        return True
+    
+    # Vérifier si l'extension du fichier est dans la liste des extensions à ignorer
+    for ext in extensions_a_ignorer:
+        if nom_fichier.endswith(ext):
+            return True
+    
+    return False
+
+# Fonction pour traiter les fichiers dans un répertoire
+def traiter_repertoire(repertoire, output_file, niveau=0):
+    global fichiers_traites, fichiers_ignores
+    
+    # Lister tous les éléments dans le répertoire
+    try:
+        elements = os.listdir(repertoire)
+        print(f"Exploration du répertoire: {repertoire} ({len(elements)} éléments)")
+    except PermissionError:
+        print(f"Erreur: Pas de permission pour accéder à {repertoire}")
+        output_file.write(f"[Erreur: Pas de permission pour accéder à {repertoire}]\n")
+        return
+    except Exception as e:
+        print(f"Erreur lors de l'accès au répertoire {repertoire}: {e}")
+        output_file.write(f"[Erreur lors de l'accès au répertoire {repertoire}: {e}]\n")
+        return
+    
+    for nom_element in elements:
+        chemin_element = os.path.join(repertoire, nom_element)
+        
+        # Si c'est un fichier, écrire son contenu (sauf s'il doit être ignoré)
+        if os.path.isfile(chemin_element):
+            if doit_ignorer_fichier(nom_element):
+                print(f"Fichier ignoré: {chemin_element}")
+                fichiers_ignores += 1
+                continue
+                
+            chemin_relatif = os.path.relpath(chemin_element, racine)
+            print(f"Traitement du fichier: {chemin_relatif}")
+            output_file.write(f"\n{chemin_relatif} :\n{'-' * 40}\n")
+            
+            try:
+                with open(chemin_element, 'r', encoding='utf-8') as f:
+                    contenu = f.read()
+                    output_file.write(contenu)
+                    fichiers_traites += 1
+            except UnicodeDecodeError:
+                output_file.write(f"[Fichier binaire ou encodage non supporté]\n")
+                fichiers_ignores += 1
+            except Exception as e:
+                output_file.write(f"[Erreur lors de la lecture du fichier : {e}]\n")
+                fichiers_ignores += 1
+            
+            output_file.write("\n\n")  # Saut de ligne entre les fichiers
+            output_file.flush()  # Forcer l'écriture sur le disque
+        
+        # Si c'est un dossier, appel récursif (sauf s'il est dans la liste à ignorer)
+        elif os.path.isdir(chemin_element):
+            # Ignorer les dossiers spécifiés et les dossiers cachés
+            if nom_element in dossiers_a_ignorer or nom_element.startswith('.'):
+                print(f"Dossier ignoré: {chemin_element}")
+            else:
+                traiter_repertoire(chemin_element, output_file, niveau + 1)
+
+# Ouvrir le fichier de sortie en mode écriture
+try:
+    with open(fichier_sortie, 'w', encoding='utf-8') as output_file:
+        output_file.write(f"Exploration du projet à partir de: {os.path.abspath(racine)}\n\n")
+        output_file.write(f"Dossiers ignorés: {', '.join(dossiers_a_ignorer)}\n")
+        output_file.write(f"Fichiers ignorés: {', '.join(fichiers_a_ignorer)}\n")
+        output_file.write(f"Extensions ignorées: {', '.join(extensions_a_ignorer)}\n\n")
+        
+        traiter_repertoire(racine, output_file)
+        
+        output_file.write(f"\n\nRésumé: {fichiers_traites} fichiers traités, {fichiers_ignores} fichiers ignorés ou avec erreurs.\n")
+    
+    # Vérifier si le fichier a été créé et contient des données
+    if os.path.exists(fichier_sortie):
+        taille = os.path.getsize(fichier_sortie)
+        print(f"Le fichier '{fichier_sortie}' a été créé avec succès ({taille} octets)")
+        if taille == 0:
+            print("ATTENTION: Le fichier est vide!")
+    else:
+        print(f"ERREUR: Le fichier '{fichier_sortie}' n'a pas été créé!")
+        
+    print(f"Résumé: {fichiers_traites} fichiers traités, {fichiers_ignores} fichiers ignorés ou avec erreurs.")
+    
+except Exception as e:
+    print(f"Erreur critique lors de l'exécution: {e}")
+
+
+
+resultat.txt :
+----------------------------------------
+Exploration du projet à partir de: /home/yahyaidzman/PycharmProjects/Architek
+
+Dossiers ignorés: venv, .git, __pycache__, .idea, node_modules, dist
+Fichiers ignorés: package-lock.json
+Extensions ignorées: 
+
+
+package.json :
+----------------------------------------
+{
+  "name": "vite-react-typescript-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.344.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "globals": "^15.9.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.3.0",
+    "vite": "^5.4.2"
+  }
+}
+
+
+
+tsconfig.app.json :
+----------------------------------------
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+
+
+
+tailwind.config.js :
+----------------------------------------
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+
+
+tsconfig.node.json :
+----------------------------------------
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+
+
+vite.config.ts :
+----------------------------------------
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  optimizeDeps: {
+    exclude: ['lucide-react'],
+  },
+});
+
+
+
+postcss.config.js :
+----------------------------------------
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+
+
+eslint.config.js :
+----------------------------------------
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(
+  { ignores: ['dist'] },
+  {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
+  }
+);
+
+
+
+tsconfig.json :
+----------------------------------------
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+
+
+
+.gitignore :
+----------------------------------------
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
+
+
+
+index.html :
+----------------------------------------
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Runner - Digital Agency</title>
+    <meta name="description" content="Web Runner - Your digital agency in Lyon and Paris. Specialized in web development, SEO, and community management." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
+src/App.tsx :
+----------------------------------------
+import React from 'react';
+import { Header } from './components/Header';
+import { Hero } from './components/Hero';
+import { Services } from './components/Services';
+import { About } from './components/About';
+import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
+
+function App() {
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      <Hero />
+      <Services />
+      <About />
+      <Contact />
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
+
+
+src/main.tsx :
+----------------------------------------
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+
+
+
+src/vite-env.d.ts :
+----------------------------------------
+/// <reference types="vite/client" />
+
+
+
+src/components/About.tsx :
+----------------------------------------
+import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+export const About: React.FC = () => {
+  const { t } = useLanguage();
+  const { elementRef, isVisible } = useScrollAnimation();
+  
+  return (
+    <section id="about" className="py-20 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-purple-900">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-10"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div 
+          ref={elementRef}
+          className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+            {t.aboutTitle}
+          </h2>
+          <p className="text-gray-300 text-lg leading-relaxed mb-12">
+            {t.aboutDescription}
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
+              <div className="text-3xl font-bold text-pink-400 mb-2">150+</div>
+              <div className="text-gray-300">Active Clients</div>
+            </div>
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-cyan-500/50 transition-all">
+              <div className="text-3xl font-bold text-cyan-400 mb-2">5+</div>
+              <div className="text-gray-300">Years Experience</div>
+            </div>
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-purple-500/50 transition-all">
+              <div className="text-3xl font-bold text-purple-400 mb-2">24/7</div>
+              <div className="text-gray-300">Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+src/components/Contact.tsx :
+----------------------------------------
+import React from 'react';
+import { MapPin, Phone, Mail, Instagram, Linkedin, Facebook, Youtube } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+export const Contact: React.FC = () => {
+  const { t } = useLanguage();
+  const { elementRef, isVisible } = useScrollAnimation();
+  
+  return (
+    <section id="contact" className="py-20 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div 
+          ref={elementRef}
+          className={`transform transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Lyon Office */}
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
+              <h3 className="text-pink-400 font-bold mb-4 text-lg">{t.lyonOffice}</h3>
+              <div className="text-2xl font-bold text-white mb-4">WEB RUNNER</div>
+              <div className="text-gray-300 mb-2">57 Place de la République</div>
+              <div className="text-gray-300 mb-4">69002 LYON</div>
+              <div className="flex items-center gap-2 text-white">
+                <Phone size={16} />
+                <span>04 72 54 71 01</span>
+              </div>
+            </div>
+            
+            {/* Paris Office */}
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-cyan-500/50 transition-all">
+              <h3 className="text-cyan-400 font-bold mb-4 text-lg">{t.parisOffice}</h3>
+              <div className="text-2xl font-bold text-white mb-4">WEB RUNNER</div>
+              <div className="text-gray-300 mb-2">58 Rue de Monceau</div>
+              <div className="text-gray-300 mb-4">75008 PARIS</div>
+              <div className="flex items-center gap-2 text-white">
+                <Phone size={16} />
+                <span>01 88 90 75 08</span>
+              </div>
+            </div>
+            
+            {/* Our Solutions */}
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-purple-500/50 transition-all">
+              <h3 className="text-purple-400 font-bold mb-4 text-lg">{t.ourSolutions}</h3>
+              <div className="space-y-2 text-gray-300">
+                <div>{t.webDesign}</div>
+                <div>{t.googleSeo}</div>
+                <div>{t.communityMgmt}</div>
+                <div>{t.virtualTour}</div>
+                <div>{t.virtualReality}</div>
+              </div>
+            </div>
+            
+            {/* Follow Us */}
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
+              <h3 className="text-pink-400 font-bold mb-4 text-lg">{t.followUs}</h3>
+              <div className="flex gap-4 mb-4">
+                <Instagram className="text-pink-400 hover:text-pink-300 cursor-pointer transition-colors" size={24} />
+                <Linkedin className="text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors" size={24} />
+                <Facebook className="text-blue-400 hover:text-blue-300 cursor-pointer transition-colors" size={24} />
+                <Youtube className="text-red-400 hover:text-red-300 cursor-pointer transition-colors" size={24} />
+              </div>
+              <div className="text-gray-300 text-sm mb-4">{t.dontMiss}</div>
+              <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg font-medium w-full transition-all">
+                {t.getQuote}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+src/components/Footer.tsx :
+----------------------------------------
+import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
+
+export const Footer: React.FC = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <footer className="py-8 bg-black border-t border-gray-800">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex gap-6 text-gray-400 text-sm">
+            <a href="#" className="hover:text-white transition-colors">{t.clientWork}</a>
+            <a href="#" className="hover:text-white transition-colors">{t.digitalTips}</a>
+            <a href="#" className="hover:text-white transition-colors">{t.contact}</a>
+            <a href="#" className="hover:text-white transition-colors">{t.legalMentions}</a>
+            <a href="#" className="hover:text-white transition-colors">{t.privacy}</a>
+          </div>
+          
+          <div className="text-gray-400 text-sm">
+            {t.copyright}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+
+src/components/Header.tsx :
+----------------------------------------
+import React, { useState } from 'react';
+import { Menu, X, Phone } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
+
+export const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
+  
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-pink-500/20">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+              WEB RUNNER
+            </div>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="#home" className="text-white hover:text-pink-400 transition-colors">
+              {t.home}
+            </a>
+            <a href="#services" className="text-white hover:text-pink-400 transition-colors">
+              {t.services}
+            </a>
+            <a href="#about" className="text-white hover:text-pink-400 transition-colors">
+              {t.about}
+            </a>
+            <a href="#contact" className="text-white hover:text-pink-400 transition-colors">
+              {t.contact}
+            </a>
+          </nav>
+          
+          {/* Contact */}
+          <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center gap-2 text-white text-sm">
+              <Phone size={16} />
+              <span>{t.phone}</span>
+            </div>
+            <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg font-medium transition-all transform hover:scale-105">
+              {t.getQuote}
+            </button>
+          </div>
+          
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-white hover:text-pink-400 transition-colors"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+        
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-pink-500/20">
+            <nav className="flex flex-col gap-4 mt-4">
+              <a href="#home" className="text-white hover:text-pink-400 transition-colors">
+                {t.home}
+              </a>
+              <a href="#services" className="text-white hover:text-pink-400 transition-colors">
+                {t.services}
+              </a>
+              <a href="#about" className="text-white hover:text-pink-400 transition-colors">
+                {t.about}
+              </a>
+              <a href="#contact" className="text-white hover:text-pink-400 transition-colors">
+                {t.contact}
+              </a>
+              <div className="flex items-center gap-2 text-white text-sm mt-4">
+                <Phone size={16} />
+                <span>{t.phone}</span>
+              </div>
+              <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg font-medium w-fit">
+                {t.getQuote}
+              </button>
+            </nav>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
+
+
+src/components/Hero.tsx :
+----------------------------------------
+import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+export const Hero: React.FC = () => {
+  const { t } = useLanguage();
+  const { elementRef, isVisible } = useScrollAnimation();
+  
+  return (
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Enhanced Background with Terminal Style */}
+      <div className="absolute inset-0 bg-black">
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        
+        {/* Terminal Windows */}
+        <div className="absolute top-10 left-10 w-80 h-48 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm">
+          {/* Terminal Header */}
+          <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/30">
+            <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
+            <span className="text-gray-400 text-xs ml-2 font-mono">terminal</span>
+          </div>
+          {/* Terminal Content */}
+          <div className="p-3 font-mono text-xs text-green-400/60 space-y-1">
+            <div>$ npm install react</div>
+            <div>$ git commit -m "feat: new component"</div>
+            <div>$ npm run build</div>
+            <div className="text-cyan-400/60">✓ Build successful</div>
+          </div>
+        </div>
+        
+        {/* Second Terminal Window */}
+        <div className="absolute bottom-20 right-10 w-72 h-40 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm">
+          <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/30">
+            <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
+            <span className="text-gray-400 text-xs ml-2 font-mono">bash</span>
+          </div>
+          <div className="p-3 font-mono text-xs text-purple-400/60 space-y-1">
+            <div>$ cd web-runner</div>
+            <div>$ npm start</div>
+            <div className="text-cyan-400/60">Server running on port 3000</div>
+            <div className="animate-pulse">█</div>
+          </div>
+        </div>
+        
+        {/* Code Editor Window */}
+        <div className="absolute top-1/2 left-5 w-64 h-32 bg-gray-900/15 border border-gray-700/20 rounded-lg backdrop-blur-sm transform -translate-y-1/2">
+          <div className="flex items-center gap-2 px-3 py-1 border-b border-gray-700/20">
+            <div className="w-2 h-2 rounded-full bg-red-500/50"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500/50"></div>
+            <span className="text-gray-500 text-xs ml-1 font-mono">App.tsx</span>
+          </div>
+          <div className="p-2 font-mono text-xs space-y-1">
+            <div className="text-purple-400/50">import React from 'react';</div>
+            <div className="text-cyan-400/50">function App() &lbrace;</div>
+            <div className="text-green-400/50 ml-2">return &lt;div&gt;Hello&lt;/div&gt;</div>
+            <div className="text-cyan-400/50">&rbrace;</div>
+          </div>
+        </div>
+        
+        {/* Code Brackets */}
+        <div className="absolute inset-0">
+          {[
+            { text: '</>', x: '15%', y: '20%' },
+            { text: '{}', x: '85%', y: '15%' },
+            { text: '[]', x: '20%', y: '80%' },
+            { text: '()', x: '80%', y: '75%' },
+            { text: '<div>', x: '8%', y: '60%' },
+            { text: '</div>', x: '90%', y: '45%' }
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="absolute text-cyan-400/15 text-2xl font-mono"
+              style={{
+                left: item.x,
+                top: item.y,
+                animation: `floatBracket ${8 + i}s ease-in-out infinite`,
+                animationDelay: `${i * 2}s`
+              }}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        
+        {/* Code Keywords */}
+        <div className="absolute inset-0">
+          {[
+            { text: 'const', x: '25%', y: '30%' },
+            { text: 'function', x: '70%', y: '25%' },
+            { text: 'return', x: '30%', y: '70%' },
+            { text: 'import', x: '65%', y: '65%' },
+            { text: 'export', x: '18%', y: '45%' },
+            { text: 'async', x: '78%', y: '55%' }
+          ].map((item, i) => (
+            <div
+              key={`code-${i}`}
+              className="absolute text-purple-400/12 text-sm font-mono"
+              style={{
+                left: item.x,
+                top: item.y,
+                animation: `floatBracket ${10 + i}s ease-in-out infinite`,
+                animationDelay: `${i * 1.5}s`
+              }}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        
+        {/* Terminal Commands */}
+        <div className="absolute inset-0">
+          {[
+            { text: '$ npm run dev', x: '12%', y: '35%' },
+            { text: '$ git push', x: '82%', y: '30%' },
+            { text: '$ yarn build', x: '22%', y: '65%' },
+            { text: '$ code .', x: '72%', y: '70%' }
+          ].map((item, i) => (
+            <div
+              key={`terminal-${i}`}
+              className="absolute text-green-400/10 text-xs font-mono"
+              style={{
+                left: item.x,
+                top: item.y,
+                animation: `floatBracket ${12 + i}s ease-in-out infinite`,
+                animationDelay: `${i * 3}s`
+              }}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        
+        {/* Operators */}
+        <div className="absolute inset-0">
+          {[
+            { text: ';', x: '35%', y: '25%' },
+            { text: '=>', x: '60%', y: '35%' },
+            { text: '&&', x: '40%', y: '75%' },
+            { text: '||', x: '55%', y: '80%' },
+            { text: '===', x: '28%', y: '50%' },
+            { text: '!==', x: '68%', y: '40%' }
+          ].map((item, i) => (
+            <div
+              key={`operator-${i}`}
+              className="absolute text-pink-400/12 text-lg font-mono"
+              style={{
+                left: item.x,
+                top: item.y,
+                animation: `floatBracket ${9 + i}s ease-in-out infinite`,
+                animationDelay: `${i * 2.5}s`
+              }}
+            >
+              {item.text}
+            </div>
+          ))}
+        </div>
+        
+        {/* Scanning Lines */}
+        <div className="absolute inset-0">
+          <div 
+            className="absolute w-full h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
+            style={{
+              animation: 'scanCode 15s linear infinite',
+              top: '50%'
+            }}
+          />
+          <div 
+            className="absolute w-full h-px bg-gradient-to-r from-transparent via-green-400/15 to-transparent"
+            style={{
+              animation: 'scanCode 20s linear infinite reverse',
+              top: '30%'
+            }}
+          />
+        </div>
+      </div>
+      
+      <div 
+        ref={elementRef}
+        className={`container mx-auto px-4 text-center relative z-10 transform transition-all duration-1000 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}
+      >
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* Clean Main Title */}
+          <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent font-mono tracking-tight">
+            {t.heroTitle}
+          </h1>
+          
+          {/* Simple Subtitle */}
+          <div className="text-xl md:text-2xl text-cyan-400 font-light tracking-widest">
+            {t.heroSubtitle}
+          </div>
+          
+          {/* Clean Description */}
+          <p className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto">
+            {t.heroDescription}
+          </p>
+          
+          {/* Single CTA Button */}
+          <div className="pt-8">
+            <button className="px-12 py-4 bg-white text-black hover:bg-cyan-400 hover:text-black font-medium text-lg transition-all duration-300 rounded-sm tracking-wide">
+              {t.getQuote}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+src/components/ServiceCard.tsx :
+----------------------------------------
+import React from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useLanguage } from '../hooks/useLanguage';
+
+interface ServiceCardProps {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  gradient: string;
+  delay?: number;
+}
+
+export const ServiceCard: React.FC<ServiceCardProps> = ({
+  title,
+  description,
+  icon,
+  gradient,
+  delay = 0
+}) => {
+  const { elementRef, isVisible } = useScrollAnimation();
+  const { t } = useLanguage();
+  
+  return (
+    <div 
+      ref={elementRef}
+      className={`transform transition-all duration-1000 ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all duration-300 group hover:transform hover:scale-105">
+        <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+          {icon}
+        </div>
+        
+        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-pink-400 transition-colors">
+          {title}
+        </h3>
+        
+        <p className="text-gray-300 mb-6 leading-relaxed">
+          {description}
+        </p>
+        
+        <div className="flex gap-4">
+          <button className="px-6 py-2 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium">
+            {t.learnMore}
+          </button>
+          <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium">
+            {t.getQuote}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+src/components/Services.tsx :
+----------------------------------------
+import React from 'react';
+import { Code, Search, Users, WholeWord as Wordpress, FileSymlink as Html5, Rss as Css3 } from 'lucide-react';
+import { ServiceCard } from './ServiceCard';
+import { useLanguage } from '../hooks/useLanguage';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+export const Services: React.FC = () => {
+  const { t } = useLanguage();
+  const { elementRef, isVisible } = useScrollAnimation();
+  
+  const services = [
+    {
+      title: t.webDevelopment,
+      description: t.webDevelopmentDesc,
+      icon: <Code className="text-white" size={24} />,
+      gradient: 'from-purple-500 to-pink-500',
+      delay: 0
+    },
+    {
+      title: t.seoSea,
+      description: t.seoSeaDesc,
+      icon: <Search className="text-white" size={24} />,
+      gradient: 'from-cyan-500 to-blue-500',
+      delay: 200
+    },
+    {
+      title: t.communityManagement,
+      description: t.communityManagementDesc,
+      icon: <Users className="text-white" size={24} />,
+      gradient: 'from-pink-500 to-red-500',
+      delay: 400
+    }
+  ];
+  
+  return (
+    <section id="services" className="py-20 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div 
+          ref={elementRef}
+          className={`text-center mb-16 transform transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            {t.services}
+          </h2>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            {t.aboutDescription}
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={index}
+              {...service}
+            />
+          ))}
+        </div>
+        
+        {/* Technology Icons */}
+        <div className="mt-16 flex justify-center gap-8 flex-wrap">
+          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Wordpress size={32} />
+            <span className="text-sm">WordPress</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Html5 size={32} />
+            <span className="text-sm">HTML5</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Css3 size={32} />
+            <span className="text-sm">CSS3</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <Code size={32} />
+            <span className="text-sm">PHP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+src/hooks/useLanguage.ts :
+----------------------------------------
+import { translations } from '../data/translations';
+
+export const useLanguage = () => {
+  return { 
+    t: translations,
+    isRTL: false,
+    currentLanguage: 'en'
+  };
+};
+
+
+src/hooks/useScrollAnimation.ts :
+----------------------------------------
+import { useEffect, useRef, useState } from 'react';
+
+export const useScrollAnimation = (threshold = 0.1) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold }
+    );
+    
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+    
+    return () => {
+      if (elementRef.current) {
+        observer.unobserve(elementRef.current);
+      }
+    };
+  }, [threshold]);
+  
+  return { elementRef, isVisible };
+};
+
+
+src/types/index.ts :
+----------------------------------------
+export interface Language {
+  code: string;
+  name: string;
+  direction: 'ltr' | 'rtl';
+}
+
+export interface Translation {
+  // Navigation
+  menu: string;
+  home: string;
+  services: string;
+  about: string;
+  contact: string;
+  
+  // Header
+  phone: string;
+  getQuote: string;
+  
+  // Hero Section
+  heroTitle: string;
+  heroSubtitle: string;
+  heroDescription: string;
+  
+  // Services
+  webDevelopment: string;
+  webDevelopmentDesc: string;
+  seoSea: string;
+  seoSeaDesc: string;
+  communityManagement: string;
+  communityManagementDesc: string;
+  learnMore: string;
+  
+  // About
+  aboutTitle: string;
+  aboutDescription: string;
+  clientsCount: string;
+  
+  // Contact
+  contactTitle: string;
+  contactDescription: string;
+  lyonOffice: string;
+  parisOffice: string;
+  ourSolutions: string;
+  followUs: string;
+  dontMiss: string;
+  
+  // Footer
+  webDesign: string;
+  googleSeo: string;
+  communityMgmt: string;
+  virtualTour: string;
+  virtualReality: string;
+  clientWork: string;
+  digitalTips: string;
+  legalMentions: string;
+  privacy: string;
+  copyright: string;
+}
+
+
+src/data/translations.ts :
+----------------------------------------
+export const translations = {
+  menu: 'MENU',
+  home: 'Home',
+  services: 'Services',
+  about: 'About',
+  contact: 'Contact',
+  
+  phone: '04 72 54 71 01',
+  getQuote: 'GET A QUOTE',
+  
+  heroTitle: 'WEB RUNNER',
+  heroSubtitle: 'AGENCY 360',
+  heroDescription: 'YOUR DIGITAL AGENCY IN LYON AND PARIS!',
+  
+  webDevelopment: 'CUSTOM WEB DEVELOPMENT',
+  webDevelopmentDesc: 'Web Runner agency specializes in creating custom WordPress websites and e-commerce solutions in Lyon and Paris with over 150 active clients.',
+  seoSea: 'SEO & SEA OPTIMIZATION',
+  seoSeaDesc: 'Our web agency also specializes in natural SEO referencing as well as paid SEA referencing and also referencing on AI assistants.',
+  communityManagement: 'TRUST US WITH YOUR COMMUNITY MANAGEMENT',
+  communityManagementDesc: 'Web Runner agency handles social media management for businesses and freelance professionals.',
+  learnMore: 'LEARN MORE',
+  
+  aboutTitle: 'About Web Runner',
+  aboutDescription: 'We are a digital agency committed to helping businesses grow online through innovative web solutions.',
+  clientsCount: '150+ active clients',
+  
+  contactTitle: 'Contact Us',
+  contactDescription: 'Ready to start your project? Get in touch with our team.',
+  lyonOffice: 'LYON OFFICE',
+  parisOffice: 'PARIS OFFICE',
+  ourSolutions: 'OUR SOLUTIONS',
+  followUs: 'FOLLOW US!',
+  dontMiss: 'Don\'t miss the latest news!',
+  
+  webDesign: 'Website Creation',
+  googleSeo: 'Google SEO',
+  communityMgmt: 'Community Management',
+  virtualTour: '360° Virtual Tour',
+  virtualReality: 'Virtual Reality',
+  clientWork: 'CLIENT WORK',
+  digitalTips: 'DIGITAL TIPS',
+  legalMentions: 'LEGAL MENTIONS',
+  privacy: 'PRIVACY',
+  copyright: 'COPYRIGHT 2025 © AC CONSULTANTS'
+};
+
+
+src/index.css :
+----------------------------------------
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #ec4899);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #be185d);
+}
+
+/* Minimal Animations */
+@keyframes floatBracket {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.4;
+  }
+}
+
+@keyframes scanCode {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Backdrop blur support */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Hover effects */
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+
+test.py :
+----------------------------------------
+import os
+
+# Chemin du répertoire courant
+racine = '.'
+
+# Nom du fichier de sortie
+fichier_sortie = 'resultat.txt'
+
+# Dossiers à ignorer
+dossiers_a_ignorer = ['venv', '.git', '__pycache__', '.idea', 'node_modules', 'dist']
+
+# Fichiers à ignorer (par nom ou extension)
+fichiers_a_ignorer = [
+    'package-lock.json',  # Fichiers spécifiques à ignorer
+
+]
+
+# Extensions de fichiers à ignorer
+extensions_a_ignorer = [
+]
+
+# Compteurs pour le débogage
+fichiers_traites = 0
+fichiers_ignores = 0
+
+# Fonction pour vérifier si un fichier doit être ignoré
+def doit_ignorer_fichier(nom_fichier):
+    # Vérifier si le nom du fichier est dans la liste des fichiers à ignorer
+    if nom_fichier in fichiers_a_ignorer:
+        return True
+    
+    # Vérifier si l'extension du fichier est dans la liste des extensions à ignorer
+    for ext in extensions_a_ignorer:
+        if nom_fichier.endswith(ext):
+            return True
+    
+    return False
+
+# Fonction pour traiter les fichiers dans un répertoire
+def traiter_repertoire(repertoire, output_file, niveau=0):
+    global fichiers_traites, fichiers_ignores
+    
+    # Lister tous les éléments dans le répertoire
+    try:
+        elements = os.listdir(repertoire)
+        print(f"Exploration du répertoire: {repertoire} ({len(elements)} éléments)")
+    except PermissionError:
+        print(f"Erreur: Pas de permission pour accéder à {repertoire}")
+        output_file.write(f"[Erreur: Pas de permission pour accéder à {repertoire}]\n")
+        return
+    except Exception as e:
+        print(f"Erreur lors de l'accès au répertoire {repertoire}: {e}")
+        output_file.write(f"[Erreur lors de l'accès au répertoire {repertoire}: {e}]\n")
+        return
+    
+    for nom_element in elements:
+        chemin_element = os.path.join(repertoire, nom_element)
+        
+        # Si c'est un fichier, écrire son contenu (sauf s'il doit être ignoré)
+        if os.path.isfile(chemin_element):
+            if doit_ignorer_fichier(nom_element):
+                print(f"Fichier ignoré: {chemin_element}")
+                fichiers_ignores += 1
+                continue
+                
+            chemin_relatif = os.path.relpath(chemin_element, racine)
+            print(f"Traitement du fichier: {chemin_relatif}")
+            output_file.write(f"\n{chemin_relatif} :\n{'-' * 40}\n")
+            
+            try:
+                with open(chemin_element, 'r', encoding='utf-8') as f:
+                    contenu = f.read()
+                    output_file.write(contenu)
+                    fichiers_traites += 1
+            except UnicodeDecodeError:
+                output_file.write(f"[Fichier binaire ou encodage non supporté]\n")
+                fichiers_ignores += 1
+            except Exception as e:
+                output_file.write(f"[Erreur lors de la lecture du fichier : {e}]\n")
+                fichiers_ignores += 1
+            
+            output_file.write("\n\n")  # Saut de ligne entre les fichiers
+            output_file.flush()  # Forcer l'écriture sur le disque
+        
+        # Si c'est un dossier, appel récursif (sauf s'il est dans la liste à ignorer)
+        elif os.path.isdir(chemin_element):
+            # Ignorer les dossiers spécifiés et les dossiers cachés
+            if nom_element in dossiers_a_ignorer or nom_element.startswith('.'):
+                print(f"Dossier ignoré: {chemin_element}")
+            else:
+                traiter_repertoire(chemin_element, output_file, niveau + 1)
+
+# Ouvrir le fichier de sortie en mode écriture
+try:
+    with open(fichier_sortie, 'w', encoding='utf-8') as output_file:
+        output_file.write(f"Exploration du projet à partir de: {os.path.abspath(racine)}\n\n")
+        output_file.write(f"Dossiers ignorés: {', '.join(dossiers_a_ignorer)}\n")
+        output_file.write(f"Fichiers ignorés: {', '.join(fichiers_a_ignorer)}\n")
+        output_file.write(f"Extensions ignorées: {', '.join(extensions_a_ignorer)}\n\n")
+        
+        traiter_repertoire(racine, output_file)
+        
+        output_file.write(f"\n\nRésumé: {fichiers_traites} fichiers traités, {fichiers_ignores} fichiers ignorés ou avec erreurs.\n")
+    
+    # Vérifier si le fichier a été créé et contient des données
+    if os.path.exists(fichier_sortie):
+        taille = os.path.getsize(fichier_sortie)
+        print(f"Le fichier '{fichier_sortie}' a été créé avec succès ({taille} octets)")
+        if taille == 0:
+            print("ATTENTION: Le fichier est vide!")
+    else:
+        print(f"ERREUR: Le fichier '{fichier_sortie}' n'a pas été créé!")
+        
+    print(f"Résumé: {fichiers_traites} fichiers traités, {fichiers_ignores} fichiers ignorés ou avec erreurs.")
+    
+except Exception as e:
+    print(f"Erreur critique lors de l'exécution: {e}")
+
+
+
+
+
+
+Résumé: 27 fichiers traités, 1 fichiers ignorés ou avec erreurs.
