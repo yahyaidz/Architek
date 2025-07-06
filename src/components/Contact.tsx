@@ -9,8 +9,8 @@ export const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="py-16 md:py-20 relative overflow-hidden">
-      {/* Smooth transition from about section */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-gray-900 via-black/80 to-transparent pointer-events-none z-10"></div>
+      {/* Smooth transition from about section - matching hero style */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-gray-900 via-gray-900/80 to-transparent pointer-events-none z-10"></div>
       
       {/* Background with smooth blending */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-black">
@@ -84,8 +84,8 @@ export const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Smooth transition to footer */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none z-10"></div>
+      {/* Smooth transition to footer - matching hero style */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10"></div>
     </section>
   );
 };

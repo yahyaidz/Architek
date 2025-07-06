@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
   
   return (
     <footer className="py-6 md:py-8 bg-black border-t border-gray-800 relative">
-      {/* Smooth transition from contact section */}
+      {/* Smooth transition from contact section - matching hero style */}
       <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black via-black/90 to-transparent pointer-events-none z-10"></div>
       
       <div className="container mx-auto px-4 relative z-20">
