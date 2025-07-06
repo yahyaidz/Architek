@@ -14,27 +14,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* Custom Scrollbar - hidden on mobile for better performance */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #06b6d4, #ec4899);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #0891b2, #be185d);
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #06b6d4, #ec4899);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #0891b2, #be185d);
-}
-
-/* Minimal Animations */
+/* Optimized animations with will-change for better performance */
 @keyframes floatBracket {
   0%, 100% {
     transform: translateY(0px);
@@ -71,42 +74,123 @@ body {
   }
 }
 
+/* Slide in animation for mobile menu */
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.slide-in-from-top-2 {
+  animation-name: slide-in-from-top;
+}
+
+.duration-200 {
+  animation-duration: 200ms;
+}
+
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Smooth transitions */
-* {
-  transition: all 0.3s ease;
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
 }
 
-/* Backdrop blur support */
+/* Smooth transitions with reduced motion support */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    transition: all 0.3s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Backdrop blur support with fallback */
 .backdrop-blur-sm {
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
-/* Hover effects */
-.hover-glow:hover {
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+@supports not (backdrop-filter: blur(4px)) {
+  .backdrop-blur-sm {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 }
 
-/* Mobile optimization */
+/* Touch optimization */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Mobile-first responsive design optimizations */
 @media (max-width: 768px) {
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
-  /* Désactivation des animations lourdes sur mobile */
-  /* Note: La plupart des animations sont masquées via la logique JSX dans Hero.tsx
-     avec `hidden md:block`. Si des éléments restants avaient des animations,
-     on pourrait utiliser `animation-play-state: paused !important;` ici. */
-  /* Exemple :
-  .element-with-float-animation {
-    animation: none !important;
+  /* Reduce font sizes slightly on very small screens */
+  @media (max-width: 375px) {
+    html {
+      font-size: 14px;
+    }
   }
-  .element-with-scan-animation {
-    animation: none !important;
+
+  /* Optimize button sizes for touch */
+  button {
+    min-height: 44px;
+    min-width: 44px;
   }
-  */
+
+  /* Improve text readability */
+  p, div {
+    line-height: 1.6;
+  }
+
+  /* Reduce motion on mobile to save battery */
+  * {
+    animation-duration: 0.5s !important;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Optimize for retina displays */
+  .bg-gradient-to-r {
+    background-attachment: fixed;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  /* Already optimized for dark theme */
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #06b6d4;
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
 }

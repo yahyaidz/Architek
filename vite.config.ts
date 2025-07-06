@@ -7,4 +7,30 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  build: {
+    // Optimize for mobile
+    target: 'es2015',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          icons: ['lucide-react'],
+        },
+      },
+    },
+    // Enable gzip compression
+    reportCompressedSize: true,
+  },
+  server: {
+    // Optimize dev server for mobile testing
+    host: true,
+    port: 5173,
+  },
 });

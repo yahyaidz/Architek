@@ -1,5 +1,5 @@
-import React from 'react';
-import { Code, Search, Users, WholeWord as Wordpress, FileSymlink as Html5, Rss as Css3 } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Code, Search, Users, Globe, Palette, Smartphone } from 'lucide-react';
 import { ServiceCard } from './ServiceCard';
 import { useLanguage } from '../hooks/useLanguage';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -8,7 +8,8 @@ export const Services: React.FC = () => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
 
-  const services = [
+  // Memoize services data to prevent re-creation
+  const services = useMemo(() => [
     {
       title: t.webDevelopment,
       description: t.webDevelopmentDesc,
@@ -30,32 +31,40 @@ export const Services: React.FC = () => {
       gradient: 'from-pink-500 to-red-500',
       delay: 400
     }
-  ];
+  ], [t]);
+
+  // Memoize tech icons
+  const techIcons = useMemo(() => [
+    { icon: Globe, label: 'WordPress' },
+    { icon: Code, label: 'HTML5' },
+    { icon: Palette, label: 'CSS3' },
+    { icon: Smartphone, label: 'Mobile' }
+  ], []);
 
   return (
-    <section id="services" className="py-20 relative overflow-hidden">
-      {/* Arrière-plan */}
+    <section id="services" className="py-16 md:py-20 relative overflow-hidden">
+      {/* Simplified background for better mobile performance */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5"></div>
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5 hidden md:block"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div
           ref={elementRef}
-          className={`text-center mb-16 transform transition-all duration-1000 ${
+          className={`text-center mb-12 md:mb-16 transform transition-all duration-1000 ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6">
             {t.services}
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto px-4"> {/* Ajout de px-4 */}
+          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto px-2 sm:px-4 leading-relaxed">
             {t.aboutDescription}
           </p>
         </div>
 
-        {/* Grille mise à jour pour la réactivité */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> {/* Par défaut sur 1 colonne, 3 sur écrans moyens */}
+        {/* Services grid - optimized for mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
@@ -64,25 +73,17 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Icônes Technologiques */}
-        {/* Assurez-vous que ce conteneur flex s'enroule bien */}
-        <div className="mt-16 flex justify-center gap-8 flex-wrap text-center">
-          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
-            <Wordpress size={32} />
-            <span className="text-sm">WordPress</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
-            <Html5 size={32} />
-            <span className="text-sm">HTML5</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
-            <Css3 size={32} />
-            <span className="text-sm">CSS3</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
-            <Code size={32} />
-            <span className="text-sm">PHP</span>
-          </div>
+        {/* Tech icons - simplified for mobile */}
+        <div className="flex justify-center items-center gap-6 sm:gap-8 flex-wrap">
+          {techIcons.map(({ icon: Icon, label }, index) => (
+            <div 
+              key={index}
+              className="flex flex-col items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer group touch-manipulation"
+            >
+              <Icon size={28} className="sm:w-8 sm:h-8 group-hover:scale-110 transition-transform" />
+              <span className="text-xs sm:text-sm font-medium">{label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -20,9 +20,6 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   const { elementRef, isVisible } = useScrollAnimation();
   const { t } = useLanguage();
 
-  // Les effets de survol ("hover:") de Tailwind ne s'appliquent généralement que lorsque le périphérique supporte le survol (pas sur les écrans tactiles).
-  // Nous avons ajusté la taille du texte et la disposition des boutons pour un meilleur rendu mobile.
-
   return (
     <div
       ref={elementRef}
@@ -31,25 +28,24 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      {/* Le groupe hover reste pour les effets sur desktop/tablettes */}
-      <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-500/50 transition-all duration-300 group hover:scale-105">
-        <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+      <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-pink-500/50 transition-all duration-300 group hover:scale-105 h-full flex flex-col">
+        <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform flex-shrink-0`}>
           {icon}
         </div>
 
-        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-pink-400 transition-colors">
+        <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 group-hover:text-pink-400 transition-colors leading-tight">
           {title}
         </h3>
 
-        <p className="text-gray-300 mb-6 leading-relaxed text-sm"> {/* Taille du texte ajustée */}
+        <p className="text-gray-300 mb-6 leading-relaxed text-sm md:text-base flex-grow">
           {description}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4"> {/* Les boutons s'empilent sur les plus petits écrans et s'alignent sur les écrans sm et plus */}
-          <button className="px-6 py-2 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-sm"> {/* Ajout de text-sm */}
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-auto">
+          <button className="px-4 py-2 md:px-6 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-sm touch-manipulation flex-1 sm:flex-none">
             {t.learnMore}
           </button>
-          <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium text-sm"> {/* Ajout de text-sm */}
+          <button className="px-4 py-2 md:px-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium text-sm touch-manipulation flex-1 sm:flex-none">
             {t.getQuote}
           </button>
         </div>
