@@ -33,30 +33,34 @@ export const Services: React.FC = () => {
     }
   ], [t]);
 
-  // Memoize tech icons with original brand colors
+  // Memoize tech icons with original brand colors for both icon and text
   const techIcons = useMemo(() => [
     { 
       icon: Globe, 
       label: 'WordPress',
-      hoverColor: 'hover:text-blue-500', // WordPress blue
+      iconHoverColor: 'group-hover:text-blue-500', // WordPress blue
+      textHoverColor: 'group-hover:text-blue-500', // WordPress blue for text too
       bgHover: 'group-hover:bg-blue-500/10'
     },
     { 
       icon: Code, 
       label: 'HTML5',
-      hoverColor: 'hover:text-orange-500', // HTML5 orange
+      iconHoverColor: 'group-hover:text-orange-500', // HTML5 orange
+      textHoverColor: 'group-hover:text-orange-500', // HTML5 orange for text too
       bgHover: 'group-hover:bg-orange-500/10'
     },
     { 
       icon: Palette, 
       label: 'CSS3',
-      hoverColor: 'hover:text-blue-400', // CSS3 blue
+      iconHoverColor: 'group-hover:text-blue-400', // CSS3 blue
+      textHoverColor: 'group-hover:text-blue-400', // CSS3 blue for text too
       bgHover: 'group-hover:bg-blue-400/10'
     },
     { 
       icon: Smartphone, 
       label: 'Mobile',
-      hoverColor: 'hover:text-green-500', // Mobile/responsive green
+      iconHoverColor: 'group-hover:text-green-500', // Mobile/responsive green
+      textHoverColor: 'group-hover:text-green-500', // Mobile/responsive green for text too
       bgHover: 'group-hover:bg-green-500/10'
     }
   ], []);
@@ -100,15 +104,15 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Tech icons section with original brand colors */}
+        {/* Tech icons section with original brand colors for both icons and text */}
         <div className="flex justify-center items-center gap-6 sm:gap-8 md:gap-12 flex-wrap max-w-4xl mx-auto">
-          {techIcons.map(({ icon: Icon, label, hoverColor, bgHover }, index) => (
+          {techIcons.map(({ icon: Icon, label, iconHoverColor, textHoverColor, bgHover }, index) => (
             <div 
               key={index}
-              className={`flex flex-col items-center gap-2 text-gray-400 ${hoverColor} transition-all duration-300 cursor-pointer group touch-manipulation p-3 rounded-lg ${bgHover}`}
+              className={`flex flex-col items-center gap-2 text-gray-400 transition-all duration-300 cursor-pointer group touch-manipulation p-3 rounded-lg ${bgHover}`}
             >
-              <Icon size={32} className="md:w-10 md:h-10 group-hover:scale-110 transition-transform duration-300" />
-              <span className="text-xs sm:text-sm font-medium group-hover:text-white transition-colors duration-300">{label}</span>
+              <Icon size={32} className={`md:w-10 md:h-10 group-hover:scale-110 transition-all duration-300 ${iconHoverColor}`} />
+              <span className={`text-xs sm:text-sm font-medium transition-colors duration-300 ${textHoverColor}`}>{label}</span>
             </div>
           ))}
         </div>
