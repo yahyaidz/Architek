@@ -43,9 +43,9 @@ export const Services: React.FC = () => {
 
   return (
     <section id="services" className="py-16 md:py-20 relative overflow-hidden">
-      {/* Simplified background for better mobile performance */}
+      {/* Background optimized for all screen sizes */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5 hidden md:block"></div>
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5 md:opacity-10"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -63,8 +63,8 @@ export const Services: React.FC = () => {
           </p>
         </div>
 
-        {/* Services grid - optimized for mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+        {/* Services grid with proper spacing and alignment */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 max-w-7xl mx-auto">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
@@ -73,14 +73,14 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Tech icons - simplified for mobile */}
-        <div className="flex justify-center items-center gap-6 sm:gap-8 flex-wrap">
+        {/* Tech icons section */}
+        <div className="flex justify-center items-center gap-6 sm:gap-8 md:gap-12 flex-wrap max-w-4xl mx-auto">
           {techIcons.map(({ icon: Icon, label }, index) => (
             <div 
               key={index}
               className="flex flex-col items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer group touch-manipulation"
             >
-              <Icon size={28} className="sm:w-8 sm:h-8 group-hover:scale-110 transition-transform" />
+              <Icon size={32} className="md:w-10 md:h-10 group-hover:scale-110 transition-transform" />
               <span className="text-xs sm:text-sm font-medium">{label}</span>
             </div>
           ))}
