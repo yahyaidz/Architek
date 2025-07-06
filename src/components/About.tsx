@@ -8,12 +8,19 @@ export const About: React.FC = () => {
 
   return (
     <section id="about" className="py-16 md:py-20 relative overflow-hidden">
-      {/* Simplified background for mobile */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-purple-900">
+      {/* Smooth transition from services section */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-gray-900/80 to-transparent pointer-events-none z-10"></div>
+      
+      {/* Background with smooth blending */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-purple-900">
         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-10 hidden md:block"></div>
+        
+        {/* Gradient overlays for seamless transitions */}
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-black/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-gray-900/50"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-20">
         <div
           ref={elementRef}
           className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${
@@ -44,6 +51,9 @@ export const About: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-900 via-black/80 to-transparent pointer-events-none z-10"></div>
     </section>
   );
 };

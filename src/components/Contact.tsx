@@ -9,12 +9,19 @@ export const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="py-16 md:py-20 relative overflow-hidden">
-      {/* Simplified background for mobile */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+      {/* Smooth transition from about section */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-gray-900 via-black/80 to-transparent pointer-events-none z-10"></div>
+      
+      {/* Background with smooth blending */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-black">
         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')] bg-cover bg-center opacity-5 hidden md:block"></div>
+        
+        {/* Gradient overlays for seamless transitions */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-gray-900/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-transparent to-black/70"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-20">
         <div
           ref={elementRef}
           className={`transform transition-all duration-1000 ${
