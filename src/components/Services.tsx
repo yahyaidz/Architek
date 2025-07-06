@@ -94,8 +94,8 @@ export const Services: React.FC = () => {
         </div>
       </div>
 
-      {/* Smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-gray-900/80 to-transparent pointer-events-none z-10"></div>
+      {/* Smooth transition to about section - matching the about section's background */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent pointer-events-none z-10"></div>
     </section>
   );
 };
