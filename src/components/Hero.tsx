@@ -50,64 +50,99 @@ export const Hero: React.FC = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Simplified background for mobile */}
-      <div className="absolute inset-0 bg-black">
-        {/* Lightweight grid pattern - only on larger screens */}
-        <div
-          className="absolute inset-0 opacity-5 hidden lg:block"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
+      {/* Dynamic gradient background with animated elements */}
+      <div className="absolute inset-0">
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+        
+        {/* Animated gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-transparent to-cyan-900/20 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-pink-900/10 via-transparent to-purple-900/10"></div>
+        
+        {/* Radial gradients for depth */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-purple-500/10 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-radial from-cyan-500/10 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-pink-500/5 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
 
-        {/* Terminal windows - hidden on mobile and tablet */}
-        <div className="absolute top-10 left-10 w-80 h-48 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm hidden xl:block">
-          <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/30">
-            <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
+        {/* Geometric patterns */}
+        <div className="absolute inset-0 opacity-10">
+          {/* Grid pattern */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px'
+            }}
+          />
+          
+          {/* Diagonal lines */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(45deg, rgba(236, 72, 153, 0.05) 1px, transparent 1px),
+                linear-gradient(-45deg, rgba(168, 85, 247, 0.05) 1px, transparent 1px)
+              `,
+              backgroundSize: '100px 100px'
+            }}
+          />
+        </div>
+
+        {/* Floating orbs - visible on larger screens */}
+        <div className="absolute inset-0 hidden lg:block">
+          <div className="absolute top-20 left-20 w-4 h-4 bg-cyan-400/30 rounded-full animate-ping"></div>
+          <div className="absolute top-40 right-32 w-3 h-3 bg-pink-400/30 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-32 left-40 w-5 h-5 bg-purple-400/30 rounded-full animate-ping" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute bottom-20 right-20 w-2 h-2 bg-green-400/30 rounded-full animate-ping" style={{ animationDelay: '3s' }}></div>
+        </div>
+
+        {/* Terminal windows - enhanced design */}
+        <div className="absolute top-10 left-10 w-80 h-48 bg-gray-900/30 border border-gray-700/50 rounded-lg backdrop-blur-md shadow-2xl hidden xl:block">
+          <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/50 bg-gray-800/50">
+            <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
             <span className="text-gray-400 text-xs ml-2 font-mono">terminal</span>
           </div>
-          <div className="p-3 font-mono text-xs text-green-400/60 space-y-1">
+          <div className="p-3 font-mono text-xs text-green-400/80 space-y-1">
             <div>$ npm install react</div>
             <div>$ git commit -m "feat: new component"</div>
             <div>$ npm run build</div>
-            <div className="text-cyan-400/60">✓ Build successful</div>
+            <div className="text-cyan-400/80">✓ Build successful</div>
           </div>
         </div>
 
-        <div className="absolute bottom-20 right-10 w-72 h-40 bg-gray-900/20 border border-gray-700/30 rounded-lg backdrop-blur-sm hidden xl:block">
-          <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/30">
-            <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-40 bg-gray-900/30 border border-gray-700/50 rounded-lg backdrop-blur-md shadow-2xl hidden xl:block">
+          <div className="flex items-center gap-2 px-4 py-2 border-b border-gray-700/50 bg-gray-800/50">
+            <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
             <span className="text-gray-400 text-xs ml-2 font-mono">bash</span>
           </div>
-          <div className="p-3 font-mono text-xs text-purple-400/60 space-y-1">
+          <div className="p-3 font-mono text-xs text-purple-400/80 space-y-1">
             <div>$ cd web-runner</div>
             <div>$ npm start</div>
-            <div className="text-cyan-400/60">Server running on port 3000</div>
+            <div className="text-cyan-400/80">Server running on port 3000</div>
             <div className="animate-pulse">█</div>
           </div>
         </div>
 
-        <div className="absolute top-1/2 left-5 w-64 h-32 bg-gray-900/15 border border-gray-700/20 rounded-lg backdrop-blur-sm transform -translate-y-1/2 hidden xl:block">
-          <div className="flex items-center gap-2 px-3 py-1 border-b border-gray-700/20">
-            <div className="w-2 h-2 rounded-full bg-red-500/50"></div>
-            <div className="w-2 h-2 rounded-full bg-yellow-500/50"></div>
-            <div className="w-2 h-2 rounded-full bg-green-500/50"></div>
+        <div className="absolute top-1/2 left-5 w-64 h-32 bg-gray-900/25 border border-gray-700/40 rounded-lg backdrop-blur-md shadow-2xl transform -translate-y-1/2 hidden xl:block">
+          <div className="flex items-center gap-2 px-3 py-1 border-b border-gray-700/40 bg-gray-800/40">
+            <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-500/70"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500/70"></div>
             <span className="text-gray-500 text-xs ml-1 font-mono">App.tsx</span>
           </div>
           <div className="p-2 font-mono text-xs space-y-1">
             {codeElements.map((line, i) => (
               <div key={i} className={`${
-                i === 0 ? 'text-purple-400/50' : 
-                i === 1 || i === 3 ? 'text-cyan-400/50' : 
-                'text-green-400/50 ml-2'
+                i === 0 ? 'text-purple-400/70' : 
+                i === 1 || i === 3 ? 'text-cyan-400/70' : 
+                'text-green-400/70 ml-2'
               }`}>
                 {line}
               </div>
@@ -115,12 +150,12 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Floating elements - only on desktop */}
+        {/* Enhanced floating elements */}
         <div className="absolute inset-0 hidden xl:block">
           {floatingElements.brackets.map((item, i) => (
             <div
               key={`bracket-${i}`}
-              className="absolute text-cyan-400/15 text-2xl font-mono will-change-transform"
+              className="absolute text-cyan-400/20 text-2xl font-mono will-change-transform"
               style={{
                 left: item.x,
                 top: item.y,
@@ -135,7 +170,7 @@ export const Hero: React.FC = () => {
           {floatingElements.keywords.map((item, i) => (
             <div
               key={`keyword-${i}`}
-              className="absolute text-purple-400/12 text-sm font-mono will-change-transform"
+              className="absolute text-purple-400/15 text-sm font-mono will-change-transform"
               style={{
                 left: item.x,
                 top: item.y,
@@ -150,7 +185,7 @@ export const Hero: React.FC = () => {
           {floatingElements.commands.map((item, i) => (
             <div
               key={`command-${i}`}
-              className="absolute text-green-400/10 text-xs font-mono will-change-transform"
+              className="absolute text-green-400/12 text-xs font-mono will-change-transform"
               style={{
                 left: item.x,
                 top: item.y,
@@ -165,7 +200,7 @@ export const Hero: React.FC = () => {
           {floatingElements.operators.map((item, i) => (
             <div
               key={`operator-${i}`}
-              className="absolute text-pink-400/12 text-lg font-mono will-change-transform"
+              className="absolute text-pink-400/15 text-lg font-mono will-change-transform"
               style={{
                 left: item.x,
                 top: item.y,
@@ -178,26 +213,40 @@ export const Hero: React.FC = () => {
           ))}
         </div>
 
-        {/* Scan lines - only on desktop */}
+        {/* Enhanced scan lines */}
         <div className="absolute inset-0 hidden xl:block">
           <div
-            className="absolute w-full h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent will-change-transform"
+            className="absolute w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent will-change-transform"
             style={{
               animation: 'scanCode 15s linear infinite',
               top: '50%'
             }}
           />
           <div
-            className="absolute w-full h-px bg-gradient-to-r from-transparent via-green-400/15 to-transparent will-change-transform"
+            className="absolute w-full h-px bg-gradient-to-r from-transparent via-green-400/20 to-transparent will-change-transform"
             style={{
               animation: 'scanCode 20s linear infinite reverse',
               top: '30%'
             }}
           />
+          <div
+            className="absolute w-full h-px bg-gradient-to-r from-transparent via-pink-400/25 to-transparent will-change-transform"
+            style={{
+              animation: 'scanCode 25s linear infinite',
+              top: '70%'
+            }}
+          />
+        </div>
+
+        {/* Mobile-optimized background elements */}
+        <div className="absolute inset-0 xl:hidden">
+          <div className="absolute top-10 right-10 w-20 h-20 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute bottom-20 left-10 w-16 h-16 bg-gradient-to-br from-pink-500/10 to-cyan-500/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-gradient-to-br from-purple-500/8 to-pink-500/8 rounded-full blur-xl animate-pulse" style={{ animationDelay: '4s' }}></div>
         </div>
       </div>
 
-      {/* Main content - optimized for mobile */}
+      {/* Main content */}
       <div
         ref={elementRef}
         className={`container mx-auto px-4 text-center relative z-10 transform transition-all duration-1000 ${
@@ -205,21 +254,21 @@ export const Hero: React.FC = () => {
         }`}
       >
         <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
-          {/* Responsive title with better mobile sizing */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent font-mono tracking-tight leading-tight">
+          {/* Enhanced title with better gradient */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent font-mono tracking-tight leading-tight drop-shadow-2xl">
             {t.heroTitle}
           </h1>
 
-          <div className="text-lg sm:text-xl md:text-2xl text-cyan-400 font-light tracking-widest">
+          <div className="text-lg sm:text-xl md:text-2xl text-cyan-400 font-light tracking-widest drop-shadow-lg">
             {t.heroSubtitle}
           </div>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto px-2 sm:px-4 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto px-2 sm:px-4 leading-relaxed drop-shadow-lg">
             {t.heroDescription}
           </p>
 
           <div className="pt-6 md:pt-8">
-            <button className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 text-base sm:text-lg md:text-xl bg-white text-black hover:bg-cyan-400 hover:text-black font-medium transition-all duration-300 rounded-sm tracking-wide touch-manipulation">
+            <button className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 text-base sm:text-lg md:text-xl bg-gradient-to-r from-white to-cyan-100 text-black hover:from-cyan-400 hover:to-cyan-300 hover:text-black font-medium transition-all duration-300 rounded-sm tracking-wide touch-manipulation shadow-2xl hover:shadow-cyan-400/25 transform hover:scale-105">
               {t.getQuote}
             </button>
           </div>

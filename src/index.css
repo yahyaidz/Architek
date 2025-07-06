@@ -37,14 +37,14 @@ body {
   }
 }
 
-/* Optimized animations with will-change for better performance */
+/* Enhanced animations with will-change for better performance */
 @keyframes floatBracket {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
     opacity: 0.2;
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-15px) rotate(5deg);
     opacity: 0.4;
   }
 }
@@ -55,7 +55,7 @@ body {
     opacity: 0;
   }
   50% {
-    opacity: 0.3;
+    opacity: 0.4;
   }
   100% {
     transform: translateX(100%);
@@ -72,6 +72,18 @@ body {
     opacity: 0.5;
     transform: scale(1.1);
   }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Radial gradient utility */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
 /* Slide in animation for mobile menu */
@@ -102,6 +114,10 @@ body {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
 /* Performance optimizations */
 .will-change-transform {
   will-change: transform;
@@ -127,9 +143,17 @@ body {
   -webkit-backdrop-filter: blur(4px);
 }
 
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 @supports not (backdrop-filter: blur(4px)) {
   .backdrop-blur-sm {
     background-color: rgba(0, 0, 0, 0.8);
+  }
+  .backdrop-blur-md {
+    background-color: rgba(0, 0, 0, 0.9);
   }
 }
 
@@ -193,4 +217,13 @@ a:focus-visible {
 .loading {
   opacity: 0.7;
   pointer-events: none;
+}
+
+/* Enhanced shadow utilities */
+.drop-shadow-2xl {
+  filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+}
+
+.drop-shadow-lg {
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
