@@ -83,6 +83,9 @@ export const Contact: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Smooth transition to footer */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none z-10"></div>
     </section>
   );
 };
