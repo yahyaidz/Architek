@@ -33,12 +33,32 @@ export const Services: React.FC = () => {
     }
   ], [t]);
 
-  // Memoize tech icons
+  // Memoize tech icons with original brand colors
   const techIcons = useMemo(() => [
-    { icon: Globe, label: 'WordPress' },
-    { icon: Code, label: 'HTML5' },
-    { icon: Palette, label: 'CSS3' },
-    { icon: Smartphone, label: 'Mobile' }
+    { 
+      icon: Globe, 
+      label: 'WordPress',
+      hoverColor: 'hover:text-blue-500', // WordPress blue
+      bgHover: 'group-hover:bg-blue-500/10'
+    },
+    { 
+      icon: Code, 
+      label: 'HTML5',
+      hoverColor: 'hover:text-orange-500', // HTML5 orange
+      bgHover: 'group-hover:bg-orange-500/10'
+    },
+    { 
+      icon: Palette, 
+      label: 'CSS3',
+      hoverColor: 'hover:text-blue-400', // CSS3 blue
+      bgHover: 'group-hover:bg-blue-400/10'
+    },
+    { 
+      icon: Smartphone, 
+      label: 'Mobile',
+      hoverColor: 'hover:text-green-500', // Mobile/responsive green
+      bgHover: 'group-hover:bg-green-500/10'
+    }
   ], []);
 
   return (
@@ -80,15 +100,15 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Tech icons section */}
+        {/* Tech icons section with original brand colors */}
         <div className="flex justify-center items-center gap-6 sm:gap-8 md:gap-12 flex-wrap max-w-4xl mx-auto">
-          {techIcons.map(({ icon: Icon, label }, index) => (
+          {techIcons.map(({ icon: Icon, label, hoverColor, bgHover }, index) => (
             <div 
               key={index}
-              className="flex flex-col items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-pointer group touch-manipulation"
+              className={`flex flex-col items-center gap-2 text-gray-400 ${hoverColor} transition-all duration-300 cursor-pointer group touch-manipulation p-3 rounded-lg ${bgHover}`}
             >
-              <Icon size={32} className="md:w-10 md:h-10 group-hover:scale-110 transition-transform" />
-              <span className="text-xs sm:text-sm font-medium">{label}</span>
+              <Icon size={32} className="md:w-10 md:h-10 group-hover:scale-110 transition-transform duration-300" />
+              <span className="text-xs sm:text-sm font-medium group-hover:text-white transition-colors duration-300">{label}</span>
             </div>
           ))}
         </div>
