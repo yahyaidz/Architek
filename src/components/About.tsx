@@ -28,7 +28,7 @@ export const About: React.FC = () => {
           }`}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 md:mb-8 px-2">
-            {t.aboutTitle}
+            About Architek
           </h2>
           <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-10 md:mb-12 px-2 max-w-3xl mx-auto">
             {t.aboutDescription}

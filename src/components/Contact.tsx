@@ -33,7 +33,7 @@ export const Contact: React.FC = () => {
             {/* Lyon Office */}
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
               <h3 className="text-pink-400 font-bold mb-4 text-base md:text-lg">{t.lyonOffice}</h3>
-              <div className="text-xl md:text-2xl font-bold text-white mb-4">WEB RUNNER</div>
+              <div className="text-xl md:text-2xl font-bold text-white mb-4">ARCHITEK</div>
               <div className="text-gray-300 mb-2 text-sm md:text-base">57 Place de la République</div>
               <div className="text-gray-300 mb-4 text-sm md:text-base">69002 LYON</div>
               <div className="flex items-center gap-2 text-white text-sm">
@@ -45,7 +45,7 @@ export const Contact: React.FC = () => {
             {/* Paris Office */}
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-cyan-500/50 transition-all">
               <h3 className="text-cyan-400 font-bold mb-4 text-base md:text-lg">{t.parisOffice}</h3>
-              <div className="text-xl md:text-2xl font-bold text-white mb-4">WEB RUNNER</div>
+              <div className="text-xl md:text-2xl font-bold text-white mb-4">ARCHITEK</div>
               <div className="text-gray-300 mb-2 text-sm md:text-base">58 Rue de Monceau</div>
               <div className="text-gray-300 mb-4 text-sm md:text-base">75008 PARIS</div>
               <div className="flex items-center gap-2 text-white text-sm">

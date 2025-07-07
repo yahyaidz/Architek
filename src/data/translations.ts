@@ -8,19 +8,19 @@ export const translations = {
   phone: '04 72 54 71 01',
   getQuote: 'GET A QUOTE',
   
-  heroTitle: 'WEB RUNNER',
+  heroTitle: 'ARCHITEK',
   heroSubtitle: 'AGENCY 360',
   heroDescription: 'YOUR DIGITAL AGENCY IN LYON AND PARIS!',
   
   webDevelopment: 'CUSTOM WEB DEVELOPMENT',
-  webDevelopmentDesc: 'Web Runner agency specializes in creating custom WordPress websites and e-commerce solutions in Lyon and Paris with over 150 active clients.',
+  webDevelopmentDesc: 'Architek agency specializes in creating custom WordPress websites and e-commerce solutions in Lyon and Paris with over 150 active clients.',
   seoSea: 'SEO & SEA OPTIMIZATION',
   seoSeaDesc: 'Our web agency also specializes in natural SEO referencing as well as paid SEA referencing and also referencing on AI assistants.',
   communityManagement: 'TRUST US WITH YOUR COMMUNITY MANAGEMENT',
-  communityManagementDesc: 'Web Runner agency handles social media management for businesses and freelance professionals.',
+  communityManagementDesc: 'Architek agency handles social media management for businesses and freelance professionals.',
   learnMore: 'LEARN MORE',
   
-  aboutTitle: 'About Web Runner',
+  aboutTitle: 'About Architek',
   aboutDescription: 'We are a digital agency committed to helping businesses grow online through innovative web solutions.',
   clientsCount: '150+ active clients',
   
