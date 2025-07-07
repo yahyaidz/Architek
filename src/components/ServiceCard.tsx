@@ -41,11 +41,11 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           {description}
         </p>
 
-        <div className="flex flex-row gap-3 md:gap-4 mt-auto pt-4">
-          <button className="px-4 py-2 md:px-6 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-sm touch-manipulation flex-1">
+        <div className="flex flex-row gap-2 md:gap-3 mt-auto pt-4">
+          <button className="px-3 py-2 md:px-4 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap">
             {t.learnMore}
           </button>
-          <button className="px-4 py-2 md:px-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium text-sm touch-manipulation flex-1">
+          <button className="px-3 py-2 md:px-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap">
             {t.getQuote}
           </button>
         </div>

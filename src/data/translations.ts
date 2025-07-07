@@ -20,7 +20,7 @@ export const translations = {
   saasDevelopmentDesc: 'From concept to deployment, we create AI-powered SaaS solutions with machine learning capabilities, intelligent automation, and data-driven insights.',
   aiIntegration: 'AI INTEGRATION',
   aiIntegrationDesc: 'We integrate cutting-edge AI technologies including GPT models, machine learning algorithms, and intelligent automation to enhance your digital products.',
-  learnMore: 'LEARN MORE',
+  learnMore: 'LEARN',
   
   aboutTitle: 'About Architek',
   aboutDescription: 'We are a specialized AI-powered development agency focused on creating intelligent websites, smart mobile apps, and AI-enhanced SaaS platforms using cutting-edge technologies.',
