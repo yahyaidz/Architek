@@ -68,39 +68,11 @@ export const Services: React.FC<ServicesProps> = ({ onGetQuote }) => {
       bgHover: 'group-hover:bg-green-500/10'
     },
     { 
-      icon: Smartphone, 
-      label: 'React Native',
-      iconHoverColor: 'group-hover:text-purple-500', // React Native purple
-      textHoverColor: 'group-hover:text-purple-500',
-      bgHover: 'group-hover:bg-purple-500/10'
-    },
-    { 
-      icon: Zap, 
-      label: 'TypeScript',
-      iconHoverColor: 'group-hover:text-blue-600', // TypeScript blue
-      textHoverColor: 'group-hover:text-blue-600',
-      bgHover: 'group-hover:bg-blue-600/10'
-    },
-    { 
-      icon: Palette, 
-      label: 'Tailwind',
-      iconHoverColor: 'group-hover:text-cyan-400', // Tailwind cyan
-      textHoverColor: 'group-hover:text-cyan-400',
-      bgHover: 'group-hover:bg-cyan-400/10'
-    },
-    { 
       icon: Brain, 
       label: 'AI/ML',
       iconHoverColor: 'group-hover:text-emerald-400', // AI green
       textHoverColor: 'group-hover:text-emerald-400',
       bgHover: 'group-hover:bg-emerald-400/10'
-    },
-    { 
-      icon: Bot, 
-      label: 'OpenAI',
-      iconHoverColor: 'group-hover:text-purple-400', // OpenAI purple
-      textHoverColor: 'group-hover:text-purple-400',
-      bgHover: 'group-hover:bg-purple-400/10'
     }
   ], []);
 
@@ -145,7 +117,7 @@ export const Services: React.FC<ServicesProps> = ({ onGetQuote }) => {
         </div>
 
         {/* Tech icons section with original brand colors for both icons and text */}
-        <div className="grid grid-cols-4 sm:grid-cols-8 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-2xl mx-auto">
           {techIcons.map(({ icon: Icon, label, iconHoverColor, textHoverColor, bgHover }, index) => (
             <div 
               key={index}
