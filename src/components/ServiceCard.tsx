@@ -41,7 +41,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           {description}
         </p>
 
-        <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 md:gap-4 mt-auto pt-4">
+        <div className="flex flex-row gap-3 md:gap-4 mt-auto pt-4">
           <button className="px-4 py-2 md:px-6 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-sm touch-manipulation flex-1">
             {t.learnMore}
           </button>
