@@ -2,7 +2,11 @@ import React, { useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onGetQuote: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onGetQuote }) => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
 
@@ -288,7 +292,10 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="pt-6 md:pt-8">
-            <button className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 text-base sm:text-lg md:text-xl bg-gradient-to-r from-white via-emerald-100 to-cyan-100 text-black hover:from-emerald-400 hover:via-cyan-400 hover:to-emerald-400 hover:text-black font-medium transition-all duration-300 rounded-sm tracking-wide touch-manipulation shadow-2xl hover:shadow-emerald-400/25 transform hover:scale-105">
+            <button 
+              onClick={onGetQuote}
+              className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 text-base sm:text-lg md:text-xl bg-gradient-to-r from-white via-emerald-100 to-cyan-100 text-black hover:from-emerald-400 hover:via-cyan-400 hover:to-emerald-400 hover:text-black font-medium transition-all duration-300 rounded-sm tracking-wide touch-manipulation shadow-2xl hover:shadow-emerald-400/25 transform hover:scale-105"
+            >
               {t.getQuote}
             </button>
           </div>

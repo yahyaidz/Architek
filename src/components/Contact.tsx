@@ -3,7 +3,11 @@ import { MapPin, Phone, Mail, Instagram, Linkedin, Facebook, Youtube } from 'luc
 import { useLanguage } from '../hooks/useLanguage';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-export const Contact: React.FC = () => {
+interface ContactProps {
+  onGetQuote: () => void;
+}
+
+export const Contact: React.FC<ContactProps> = ({ onGetQuote }) => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
 
@@ -76,7 +80,10 @@ export const Contact: React.FC = () => {
                 <Youtube className="text-red-400 hover:text-red-300 cursor-pointer transition-colors touch-manipulation" size={24} />
               </div>
               <div className="text-gray-300 text-sm mb-4 text-center sm:text-left">{t.dontMiss}</div>
-              <button className="px-4 py-2 md:px-6 bg-gradient-to-r from-emerald-500 via-cyan-500 to-purple-600 hover:from-emerald-600 hover:via-cyan-600 hover:to-purple-700 text-white rounded-lg font-medium w-full transition-all text-sm touch-manipulation">
+              <button 
+                onClick={onGetQuote}
+                className="px-4 py-2 md:px-6 bg-gradient-to-r from-emerald-500 via-cyan-500 to-purple-600 hover:from-emerald-600 hover:via-cyan-600 hover:to-purple-700 text-white rounded-lg font-medium w-full transition-all text-sm touch-manipulation"
+              >
                 {t.getQuote}
               </button>
             </div>

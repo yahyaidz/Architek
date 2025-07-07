@@ -2,7 +2,11 @@ import React, { useState, useCallback } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onGetQuote: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useLanguage();
   
@@ -47,14 +51,20 @@ export const Header: React.FC = () => {
               <Phone size={16} />
               <span>{t.phone}</span>
             </div>
-            <button className="px-4 py-2 xl:px-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg font-medium transition-all transform hover:scale-105 text-sm touch-manipulation">
+            <button 
+              onClick={onGetQuote}
+              className="px-4 py-2 xl:px-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg font-medium transition-all transform hover:scale-105 text-sm touch-manipulation"
+            >
               {t.getQuote}
             </button>
           </div>
           
           {/* Mobile CTA + Menu Button */}
           <div className="flex items-center gap-3 md:hidden">
-            <button className="px-3 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-xs touch-manipulation">
+            <button 
+              onClick={onGetQuote}
+              className="px-3 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-xs touch-manipulation"
+            >
               {t.getQuote}
             </button>
             <button
@@ -68,7 +78,10 @@ export const Header: React.FC = () => {
 
           {/* Tablet CTA */}
           <div className="hidden md:flex lg:hidden">
-            <button className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-sm touch-manipulation">
+            <button 
+              onClick={onGetQuote}
+              className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-sm touch-manipulation"
+            >
               {t.getQuote}
             </button>
           </div>

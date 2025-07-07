@@ -8,6 +8,7 @@ interface ServiceCardProps {
   icon: React.ReactNode;
   gradient: string;
   delay?: number;
+  onGetQuote: () => void;
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -16,6 +17,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   icon,
   gradient,
   delay = 0
+  onGetQuote
 }) => {
   const { elementRef, isVisible } = useScrollAnimation();
   const { t } = useLanguage();
@@ -45,7 +47,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           <button className="px-3 py-2 md:px-4 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap">
             {t.learnMore}
           </button>
-          <button className="px-3 py-2 md:px-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap">
+          <button 
+            onClick={onGetQuote}
+            className="px-3 py-2 md:px-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap"
+          >
             {t.getQuote}
           </button>
         </div>

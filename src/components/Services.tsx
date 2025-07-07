@@ -4,7 +4,11 @@ import { ServiceCard } from './ServiceCard';
 import { useLanguage } from '../hooks/useLanguage';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-export const Services: React.FC = () => {
+interface ServicesProps {
+  onGetQuote: () => void;
+}
+
+export const Services: React.FC<ServicesProps> = ({ onGetQuote }) => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
 
@@ -134,6 +138,7 @@ export const Services: React.FC = () => {
           {services.map((service, index) => (
             <ServiceCard
               key={index}
+              onGetQuote={onGetQuote}
               {...service}
             />
           ))}
