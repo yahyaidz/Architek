@@ -88,7 +88,7 @@ export const Contact: React.FC<ContactProps> = ({ onGetQuote }) => {
               </button>
               <div className="text-center">
                 <p className="text-emerald-400 text-xs font-medium">
-                  ✓ {t.satisfactionGuarantee}
+                  ✅ {t.satisfactionGuarantee}
                 </p>
               </div>
             </div>

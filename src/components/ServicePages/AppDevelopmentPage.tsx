@@ -44,7 +44,7 @@ export const AppDevelopmentPage: React.FC = () => {
             <div className="mt-6 flex justify-center">
               <div className="bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-cyan-500/20 border border-cyan-400/30 rounded-full px-6 py-2 backdrop-blur-sm">
                 <p className="text-cyan-300 text-sm font-medium">
-                  ✓ Pay only at the end if you are satisfied
+                  ✅ Pay Only Upon Approval
                 </p>
               </div>
             </div>

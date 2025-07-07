@@ -84,8 +84,13 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
         {/* Satisfaction Guarantee Banner */}
         <div className="bg-gradient-to-r from-emerald-900/40 via-cyan-900/40 to-emerald-900/40 border-b border-emerald-500/30 px-6 py-3">
           <div className="flex items-center justify-center gap-2 text-emerald-300">
-            <span className="text-lg">✓</span>
-            <span className="text-sm font-medium">Pay only at the end if you are satisfied</span>
+            <span className="text-lg">✅</span>
+            <span className="text-sm font-medium">{t.satisfactionGuarantee}</span>
+          </div>
+          <div className="text-center mt-1">
+            <p className="text-emerald-400/80 text-xs">
+              {t.guaranteeDescription}
+            </p>
           </div>
         </div>
 

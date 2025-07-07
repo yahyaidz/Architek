@@ -46,6 +46,6 @@ export const translations = {
   copyright: 'COPYRIGHT 2025 © AC CONSULTANTS',
   
   // Satisfaction guarantee
-  satisfactionGuarantee: 'Pay only at the end if you are satisfied',
-  guaranteeDescription: 'We believe in our work. You only pay when you\'re completely happy with the results.'
+  satisfactionGuarantee: 'Pay Only Upon Approval',
+  guaranteeDescription: 'Your satisfaction is our priority. No payment is required until the delivered work meets your expectations.'
 };

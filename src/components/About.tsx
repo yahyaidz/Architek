@@ -38,7 +38,7 @@ export const About: React.FC = () => {
           <div className="bg-gradient-to-r from-emerald-900/30 via-cyan-900/30 to-emerald-900/30 border border-emerald-500/30 rounded-2xl p-6 md:p-8 mb-10 md:mb-12 max-w-2xl mx-auto backdrop-blur-sm">
             <div className="text-center">
               <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-xl">✓</span>
+                <span className="text-white text-xl">✅</span>
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-emerald-400 mb-3">
                 {t.satisfactionGuarantee}

@@ -44,7 +44,7 @@ export const WebsiteCreationPage: React.FC = () => {
             <div className="mt-6 flex justify-center">
               <div className="bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 border border-purple-400/30 rounded-full px-6 py-2 backdrop-blur-sm">
                 <p className="text-purple-300 text-sm font-medium">
-                  ✓ Pay only at the end if you are satisfied
+                  ✅ Pay Only Upon Approval
                 </p>
               </div>
             </div>

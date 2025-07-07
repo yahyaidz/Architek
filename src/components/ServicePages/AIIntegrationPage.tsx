@@ -44,7 +44,7 @@ export const AIIntegrationPage: React.FC = () => {
             <div className="mt-6 flex justify-center">
               <div className="bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 border border-emerald-400/30 rounded-full px-6 py-2 backdrop-blur-sm">
                 <p className="text-emerald-300 text-sm font-medium">
-                  ✓ Pay only at the end if you are satisfied
+                  ✅ Pay Only Upon Approval
                 </p>
               </div>
             </div>
