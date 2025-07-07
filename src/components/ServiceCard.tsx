@@ -16,7 +16,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   description,
   icon,
   gradient,
-  delay = 0
+  delay = 0,
   onGetQuote
 }) => {
   const { elementRef, isVisible } = useScrollAnimation();
