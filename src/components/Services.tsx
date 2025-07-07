@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Code, Search, Users, Globe, Palette, Smartphone } from 'lucide-react';
+import { Code, Globe, Palette, Smartphone, Layers, Zap } from 'lucide-react';
 import { ServiceCard } from './ServiceCard';
 import { useLanguage } from '../hooks/useLanguage';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -11,23 +11,23 @@ export const Services: React.FC = () => {
   // Memoize services data to prevent re-creation
   const services = useMemo(() => [
     {
-      title: t.webDevelopment,
-      description: t.webDevelopmentDesc,
+      title: t.websiteCreation,
+      description: t.websiteCreationDesc,
       icon: <Code className="text-white" size={24} />,
       gradient: 'from-purple-500 to-pink-500',
       delay: 0
     },
     {
-      title: t.seoSea,
-      description: t.seoSeaDesc,
-      icon: <Search className="text-white" size={24} />,
+      title: t.appDevelopment,
+      description: t.appDevelopmentDesc,
+      icon: <Smartphone className="text-white" size={24} />,
       gradient: 'from-cyan-500 to-blue-500',
       delay: 200
     },
     {
-      title: t.communityManagement,
-      description: t.communityManagementDesc,
-      icon: <Users className="text-white" size={24} />,
+      title: t.saasDevelopment,
+      description: t.saasDevelopmentDesc,
+      icon: <Layers className="text-white" size={24} />,
       gradient: 'from-pink-500 to-red-500',
       delay: 400
     }
@@ -36,32 +36,46 @@ export const Services: React.FC = () => {
   // Memoize tech icons with original brand colors for both icon and text
   const techIcons = useMemo(() => [
     { 
-      icon: Globe, 
-      label: 'WordPress',
-      iconHoverColor: 'group-hover:text-blue-500', // WordPress blue
-      textHoverColor: 'group-hover:text-blue-500', // WordPress blue for text too
-      bgHover: 'group-hover:bg-blue-500/10'
-    },
-    { 
       icon: Code, 
-      label: 'HTML5',
-      iconHoverColor: 'group-hover:text-orange-500', // HTML5 orange
-      textHoverColor: 'group-hover:text-orange-500', // HTML5 orange for text too
-      bgHover: 'group-hover:bg-orange-500/10'
-    },
-    { 
-      icon: Palette, 
-      label: 'CSS3',
-      iconHoverColor: 'group-hover:text-blue-400', // CSS3 blue
-      textHoverColor: 'group-hover:text-blue-400', // CSS3 blue for text too
+      label: 'React',
+      iconHoverColor: 'group-hover:text-blue-400', // React blue
+      textHoverColor: 'group-hover:text-blue-400',
       bgHover: 'group-hover:bg-blue-400/10'
     },
     { 
-      icon: Smartphone, 
-      label: 'Mobile',
-      iconHoverColor: 'group-hover:text-green-500', // Mobile/responsive green
-      textHoverColor: 'group-hover:text-green-500', // Mobile/responsive green for text too
+      icon: Globe, 
+      label: 'Next.js',
+      iconHoverColor: 'group-hover:text-gray-300', // Next.js gray
+      textHoverColor: 'group-hover:text-gray-300',
+      bgHover: 'group-hover:bg-gray-300/10'
+    },
+    { 
+      icon: Layers, 
+      label: 'Node.js',
+      iconHoverColor: 'group-hover:text-green-500', // Node.js green
+      textHoverColor: 'group-hover:text-green-500',
       bgHover: 'group-hover:bg-green-500/10'
+    },
+    { 
+      icon: Smartphone, 
+      label: 'React Native',
+      iconHoverColor: 'group-hover:text-purple-500', // React Native purple
+      textHoverColor: 'group-hover:text-purple-500',
+      bgHover: 'group-hover:bg-purple-500/10'
+    },
+    { 
+      icon: Zap, 
+      label: 'TypeScript',
+      iconHoverColor: 'group-hover:text-blue-600', // TypeScript blue
+      textHoverColor: 'group-hover:text-blue-600',
+      bgHover: 'group-hover:bg-blue-600/10'
+    },
+    { 
+      icon: Palette, 
+      label: 'Tailwind',
+      iconHoverColor: 'group-hover:text-cyan-400', // Tailwind cyan
+      textHoverColor: 'group-hover:text-cyan-400',
+      bgHover: 'group-hover:bg-cyan-400/10'
     }
   ], []);
 
@@ -105,11 +119,11 @@ export const Services: React.FC = () => {
         </div>
 
         {/* Tech icons section with original brand colors for both icons and text */}
-        <div className="flex justify-center items-center gap-6 sm:gap-8 md:gap-12 flex-wrap max-w-4xl mx-auto">
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-6 sm:gap-8 md:gap-12 max-w-4xl mx-auto">
           {techIcons.map(({ icon: Icon, label, iconHoverColor, textHoverColor, bgHover }, index) => (
             <div 
               key={index}
-              className={`flex flex-col items-center gap-2 text-gray-400 transition-all duration-300 cursor-pointer group touch-manipulation p-3 rounded-lg ${bgHover}`}
+              className={`flex flex-col items-center gap-2 text-gray-400 transition-all duration-300 cursor-pointer group touch-manipulation p-3 rounded-lg ${bgHover} justify-center`}
             >
               <Icon size={32} className={`md:w-10 md:h-10 group-hover:scale-110 transition-all duration-300 ${iconHoverColor}`} />
               <span className={`text-xs sm:text-sm font-medium transition-colors duration-300 ${textHoverColor}`}>{label}</span>

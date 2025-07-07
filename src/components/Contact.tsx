@@ -58,11 +58,11 @@ export const Contact: React.FC = () => {
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-purple-500/50 transition-all">
               <h3 className="text-purple-400 font-bold mb-4 text-base md:text-lg">{t.ourSolutions}</h3>
               <div className="space-y-2 text-gray-300 text-sm">
-                <div>{t.webDesign}</div>
-                <div>{t.googleSeo}</div>
-                <div>{t.communityMgmt}</div>
-                <div>{t.virtualTour}</div>
-                <div>{t.virtualReality}</div>
+                <div>{t.websiteCreation}</div>
+                <div>{t.appDevelopment}</div>
+                <div>{t.saasDevelopment}</div>
+                <div>{t.customSolutions}</div>
+                <div>{t.techConsulting}</div>
               </div>
             </div>
 
