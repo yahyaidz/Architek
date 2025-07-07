@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { X, Send, User, Mail, Phone, MessageSquare, Briefcase, DollarSign } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface QuoteModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
+export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => {
+  const { t } = useLanguage();
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -108,7 +111,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Personal Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
+                < div >
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <User size={16} className="inline mr-2" />
                     Full Name *
@@ -123,7 +126,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
                     placeholder="John Doe"
                   />
                 </div>
-                <div>
+                < div >
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <Mail size={16} className="inline mr-2" />
                     Email Address *
@@ -141,7 +144,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
+                < div >
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <Phone size={16} className="inline mr-2" />
                     Phone Number
@@ -155,7 +158,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
                     placeholder="+33 1 23 45 67 89"
                   />
                 </div>
-                <div>
+                < div >
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <Briefcase size={16} className="inline mr-2" />
                     Company
@@ -173,7 +176,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
 
               {/* Project Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
+                < div >
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     Project Type *
                   </label>
@@ -193,7 +196,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
                     <option value="other">Other</option>
                   </select>
                 </div>
-                <div>
+                < div >
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <DollarSign size={16} className="inline mr-2" />
                     Budget Range
@@ -215,7 +218,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              <div>
+              < div >
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Timeline
                 </label>
@@ -235,7 +238,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose }) => {
                 </select>
               </div>
 
-              <div>
+              < div >
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   <MessageSquare size={16} className="inline mr-2" />
                   Project Description *
