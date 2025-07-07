@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useLanguage } from '../hooks/useLanguage';
 
@@ -21,6 +22,22 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 }) => {
   const { elementRef, isVisible } = useScrollAnimation();
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  const getServiceRoute = (serviceTitle: string) => {
+    switch (serviceTitle) {
+      case t.websiteCreation:
+        return '/website-creation';
+      case t.appDevelopment:
+        return '/app-development';
+      case t.saasDevelopment:
+        return '/saas-development';
+      case t.aiIntegration:
+        return '/ai-integration';
+      default:
+        return '/';
+    }
+  };
 
   return (
     <div
@@ -44,7 +61,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         </p>
 
         <div className="flex flex-row gap-2 md:gap-3 mt-auto pt-4">
-          <button className="px-3 py-2 md:px-4 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap">
+          <button 
+            onClick={() => navigate(getServiceRoute(title))}
+            className="px-3 py-2 md:px-4 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap"
+          >
             {t.learnMore}
           </button>
           <button 
