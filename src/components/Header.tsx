@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo - optimized for mobile */}
           <div className="flex items-center gap-2">
-            <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-pink-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
               ARCHITEK
             </div>
           </div>
@@ -54,7 +54,7 @@ export const Header: React.FC = () => {
           
           {/* Mobile CTA + Menu Button */}
           <div className="flex items-center gap-3 md:hidden">
-            <button className="px-3 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg font-medium text-xs touch-manipulation">
+            <button className="px-3 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-xs touch-manipulation">
               {t.getQuote}
             </button>
             <button
@@ -68,7 +68,7 @@ export const Header: React.FC = () => {
 
           {/* Tablet CTA */}
           <div className="hidden md:flex lg:hidden">
-            <button className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg font-medium text-sm touch-manipulation">
+            <button className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-sm touch-manipulation">
               {t.getQuote}
             </button>
           </div>

@@ -44,9 +44,9 @@ export const About: React.FC = () => {
               <div className="text-2xl md:text-3xl font-bold text-cyan-400 mb-2">5+</div>
               <div className="text-gray-300 text-sm md:text-base">Years Experience</div>
             </div>
-            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-purple-500/50 transition-all sm:col-span-1">
-              <div className="text-2xl md:text-3xl font-bold text-purple-400 mb-2">24/7</div>
-              <div className="text-gray-300 text-sm md:text-base">Support</div>
+            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-emerald-500/50 transition-all sm:col-span-1">
+              <div className="text-2xl md:text-3xl font-bold text-emerald-400 mb-2">AI</div>
+              <div className="text-gray-300 text-sm md:text-base">Powered</div>
             </div>
           </div>
         </div>

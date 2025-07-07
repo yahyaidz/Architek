@@ -61,8 +61,8 @@ export const Contact: React.FC = () => {
                 <div>{t.websiteCreation}</div>
                 <div>{t.appDevelopment}</div>
                 <div>{t.saasDevelopment}</div>
-                <div>{t.customSolutions}</div>
-                <div>{t.techConsulting}</div>
+                <div>{t.aiIntegration}</div>
+                <div>{t.aiConsulting}</div>
               </div>
             </div>
 
@@ -76,7 +76,7 @@ export const Contact: React.FC = () => {
                 <Youtube className="text-red-400 hover:text-red-300 cursor-pointer transition-colors touch-manipulation" size={24} />
               </div>
               <div className="text-gray-300 text-sm mb-4 text-center sm:text-left">{t.dontMiss}</div>
-              <button className="px-4 py-2 md:px-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg font-medium w-full transition-all text-sm touch-manipulation">
+              <button className="px-4 py-2 md:px-6 bg-gradient-to-r from-emerald-500 via-cyan-500 to-purple-600 hover:from-emerald-600 hover:via-cyan-600 hover:to-purple-700 text-white rounded-lg font-medium w-full transition-all text-sm touch-manipulation">
                 {t.getQuote}
               </button>
             </div>

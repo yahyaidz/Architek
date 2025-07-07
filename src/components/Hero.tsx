@@ -109,9 +109,10 @@ export const Hero: React.FC = () => {
           </div>
           <div className="p-3 font-mono text-xs text-green-400/80 space-y-1">
             <div>$ npm install react</div>
-            <div>$ git commit -m "feat: new component"</div>
+            <div>$ git commit -m "feat: AI integration"</div>
             <div>$ npm run build</div>
             <div className="text-cyan-400/80">✓ Build successful</div>
+            <div className="text-emerald-400/80">🤖 AI models loaded</div>
           </div>
         </div>
 
@@ -123,9 +124,10 @@ export const Hero: React.FC = () => {
             <span className="text-gray-400 text-xs ml-2 font-mono">bash</span>
           </div>
           <div className="p-3 font-mono text-xs text-purple-400/80 space-y-1">
-            <div>$ cd web-runner</div>
+            <div>$ cd architek-ai</div>
             <div>$ npm start</div>
             <div className="text-cyan-400/80">Server running on port 3000</div>
+            <div className="text-emerald-400/80">AI services: online</div>
             <div className="animate-pulse">█</div>
           </div>
         </div>
@@ -147,6 +149,7 @@ export const Hero: React.FC = () => {
                 {line}
               </div>
             ))}
+            <div className="text-emerald-400/70 ml-2">useAI()</div>
           </div>
         </div>
 
@@ -166,6 +169,20 @@ export const Hero: React.FC = () => {
               {item.text}
             </div>
           ))}
+
+          {/* AI-specific floating elements */}
+          <div className="absolute top-1/4 right-1/3 text-emerald-400/15 text-lg font-mono will-change-transform" style={{ animation: 'floatBracket 12s ease-in-out infinite' }}>
+            AI()
+          </div>
+          <div className="absolute bottom-1/3 left-1/4 text-purple-400/15 text-sm font-mono will-change-transform" style={{ animation: 'floatBracket 15s ease-in-out infinite', animationDelay: '3s' }}>
+            neural.network
+          </div>
+          <div className="absolute top-1/2 right-1/5 text-teal-400/15 text-base font-mono will-change-transform" style={{ animation: 'floatBracket 10s ease-in-out infinite', animationDelay: '5s' }}>
+            ML.predict()
+          </div>
+          <div className="absolute bottom-1/4 right-1/3 text-emerald-400/15 text-xs font-mono will-change-transform" style={{ animation: 'floatBracket 14s ease-in-out infinite', animationDelay: '7s' }}>
+            GPT-4
+          </div>
 
           {floatingElements.keywords.map((item, i) => (
             <div
@@ -262,7 +279,7 @@ export const Hero: React.FC = () => {
             {t.heroTitle}
           </h1>
 
-          <div className="text-lg sm:text-xl md:text-2xl text-cyan-400 font-light tracking-widest drop-shadow-lg">
+          <div className="text-lg sm:text-xl md:text-2xl bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent font-light tracking-widest drop-shadow-lg">
             {t.heroSubtitle}
           </div>
 
@@ -271,7 +288,7 @@ export const Hero: React.FC = () => {
           </p>
 
           <div className="pt-6 md:pt-8">
-            <button className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 text-base sm:text-lg md:text-xl bg-gradient-to-r from-white to-cyan-100 text-black hover:from-cyan-400 hover:to-cyan-300 hover:text-black font-medium transition-all duration-300 rounded-sm tracking-wide touch-manipulation shadow-2xl hover:shadow-cyan-400/25 transform hover:scale-105">
+            <button className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 text-base sm:text-lg md:text-xl bg-gradient-to-r from-white via-emerald-100 to-cyan-100 text-black hover:from-emerald-400 hover:via-cyan-400 hover:to-emerald-400 hover:text-black font-medium transition-all duration-300 rounded-sm tracking-wide touch-manipulation shadow-2xl hover:shadow-emerald-400/25 transform hover:scale-105">
               {t.getQuote}
             </button>
           </div>

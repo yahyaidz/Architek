@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Code, Globe, Palette, Smartphone, Layers, Zap } from 'lucide-react';
+import { Code, Globe, Palette, Smartphone, Layers, Zap, Brain, Bot } from 'lucide-react';
 import { ServiceCard } from './ServiceCard';
 import { useLanguage } from '../hooks/useLanguage';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -30,6 +30,13 @@ export const Services: React.FC = () => {
       icon: <Layers className="text-white" size={24} />,
       gradient: 'from-pink-500 to-red-500',
       delay: 400
+    },
+    {
+      title: t.aiIntegration,
+      description: t.aiIntegrationDesc,
+      icon: <Brain className="text-white" size={24} />,
+      gradient: 'from-emerald-500 to-teal-500',
+      delay: 600
     }
   ], [t]);
 
@@ -76,6 +83,20 @@ export const Services: React.FC = () => {
       iconHoverColor: 'group-hover:text-cyan-400', // Tailwind cyan
       textHoverColor: 'group-hover:text-cyan-400',
       bgHover: 'group-hover:bg-cyan-400/10'
+    },
+    { 
+      icon: Brain, 
+      label: 'AI/ML',
+      iconHoverColor: 'group-hover:text-emerald-400', // AI green
+      textHoverColor: 'group-hover:text-emerald-400',
+      bgHover: 'group-hover:bg-emerald-400/10'
+    },
+    { 
+      icon: Bot, 
+      label: 'OpenAI',
+      iconHoverColor: 'group-hover:text-purple-400', // OpenAI purple
+      textHoverColor: 'group-hover:text-purple-400',
+      bgHover: 'group-hover:bg-purple-400/10'
     }
   ], []);
 
@@ -119,13 +140,13 @@ export const Services: React.FC = () => {
         </div>
 
         {/* Tech icons section with original brand colors for both icons and text */}
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-6 sm:gap-8 md:gap-12 max-w-4xl mx-auto">
+        <div className="grid grid-cols-4 sm:grid-cols-8 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
           {techIcons.map(({ icon: Icon, label, iconHoverColor, textHoverColor, bgHover }, index) => (
             <div 
               key={index}
-              className={`flex flex-col items-center gap-2 text-gray-400 transition-all duration-300 cursor-pointer group touch-manipulation p-3 rounded-lg ${bgHover} justify-center`}
+              className={`flex flex-col items-center gap-2 text-gray-400 transition-all duration-300 cursor-pointer group touch-manipulation p-2 sm:p-3 rounded-lg ${bgHover} justify-center`}
             >
-              <Icon size={32} className={`md:w-10 md:h-10 group-hover:scale-110 transition-all duration-300 ${iconHoverColor}`} />
+              <Icon size={28} className={`sm:w-8 sm:h-8 md:w-10 md:h-10 group-hover:scale-110 transition-all duration-300 ${iconHoverColor}`} />
               <span className={`text-xs sm:text-sm font-medium transition-colors duration-300 ${textHoverColor}`}>{label}</span>
             </div>
           ))}
