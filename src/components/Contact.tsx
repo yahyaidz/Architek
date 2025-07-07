@@ -82,10 +82,15 @@ export const Contact: React.FC<ContactProps> = ({ onGetQuote }) => {
               <div className="text-gray-300 text-sm mb-4 text-center sm:text-left">{t.dontMiss}</div>
               <button 
                 onClick={onGetQuote}
-                className="px-4 py-2 md:px-6 bg-gradient-to-r from-emerald-500 via-cyan-500 to-purple-600 hover:from-emerald-600 hover:via-cyan-600 hover:to-purple-700 text-white rounded-lg font-medium w-full transition-all text-sm touch-manipulation"
+                className="px-4 py-2 md:px-6 bg-gradient-to-r from-emerald-500 via-cyan-500 to-purple-600 hover:from-emerald-600 hover:via-cyan-600 hover:to-purple-700 text-white rounded-lg font-medium w-full transition-all text-sm touch-manipulation mb-3"
               >
                 {t.getQuote}
               </button>
+              <div className="text-center">
+                <p className="text-emerald-400 text-xs font-medium">
+                  ✓ {t.satisfactionGuarantee}
+                </p>
+              </div>
             </div>
           </div>
         </div>

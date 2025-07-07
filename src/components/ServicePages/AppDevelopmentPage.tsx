@@ -39,6 +39,15 @@ export const AppDevelopmentPage: React.FC = () => {
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Intelligent mobile applications with AI integration for iOS and Android
             </p>
+            
+            {/* Satisfaction Guarantee */}
+            <div className="mt-6 flex justify-center">
+              <div className="bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-cyan-500/20 border border-cyan-400/30 rounded-full px-6 py-2 backdrop-blur-sm">
+                <p className="text-cyan-300 text-sm font-medium">
+                  ✓ Pay only at the end if you are satisfied
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Features Grid */}

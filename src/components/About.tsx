@@ -34,6 +34,21 @@ export const About: React.FC = () => {
             {t.aboutDescription}
           </p>
 
+          {/* Satisfaction Guarantee Section */}
+          <div className="bg-gradient-to-r from-emerald-900/30 via-cyan-900/30 to-emerald-900/30 border border-emerald-500/30 rounded-2xl p-6 md:p-8 mb-10 md:mb-12 max-w-2xl mx-auto backdrop-blur-sm">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-xl">✓</span>
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-emerald-400 mb-3">
+                {t.satisfactionGuarantee}
+              </h3>
+              <p className="text-gray-300 text-sm md:text-base">
+                {t.guaranteeDescription}
+              </p>
+            </div>
+          </div>
+
           {/* Stats grid - optimized for mobile */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 px-2">
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-pink-500/50 transition-all">

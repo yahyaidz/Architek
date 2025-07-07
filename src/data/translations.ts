@@ -43,5 +43,9 @@ export const translations = {
   digitalTips: 'DIGITAL TIPS',
   legalMentions: 'LEGAL MENTIONS',
   privacy: 'PRIVACY',
-  copyright: 'COPYRIGHT 2025 © AC CONSULTANTS'
+  copyright: 'COPYRIGHT 2025 © AC CONSULTANTS',
+  
+  // Satisfaction guarantee
+  satisfactionGuarantee: 'Pay only at the end if you are satisfied',
+  guaranteeDescription: 'We believe in our work. You only pay when you\'re completely happy with the results.'
 };

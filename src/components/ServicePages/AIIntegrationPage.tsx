@@ -39,6 +39,15 @@ export const AIIntegrationPage: React.FC = () => {
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Cutting-edge AI technologies including GPT models and machine learning algorithms
             </p>
+            
+            {/* Satisfaction Guarantee */}
+            <div className="mt-6 flex justify-center">
+              <div className="bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 border border-emerald-400/30 rounded-full px-6 py-2 backdrop-blur-sm">
+                <p className="text-emerald-300 text-sm font-medium">
+                  ✓ Pay only at the end if you are satisfied
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Features Grid */}
