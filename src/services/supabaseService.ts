@@ -82,7 +82,7 @@ export const quotesService = {
   }
 }
 
-// Service pour les projets
+// Service pour les projets - VERSION CORRIGÉE
 export const projectsService = {
   // Créer un nouveau projet
   async create(project: ProjectInsert) {
@@ -147,21 +147,58 @@ export const projectsService = {
     return data
   },
 
-  // Mettre à jour un projet
+  // Mettre à jour un projet - VERSION CORRIGÉE
   async update(id: string, updates: Partial< Project >) {
-    const { data, error } = await supabase
-      .from('projects')
-      .update(updates)
-      .eq('id', id)
-      .select()
-      .single()
-    
-    if (error) {
-      console.error('Error updating project:', error)
-      throw error
+    try {
+      console.log('Updating project:', { id, updates })
+      
+      // Nettoyer les données avant la mise à jour
+      const cleanUpdates: any = {}
+      
+      // Copier seulement les champs qui peuvent être mis à jour
+      if (updates.title !== undefined) cleanUpdates.title = updates.title
+      if (updates.description !== undefined) cleanUpdates.description = updates.description
+      if (updates.status !== undefined) cleanUpdates.status = updates.status
+      if (updates.start_date !== undefined) cleanUpdates.start_date = updates.start_date
+      if (updates.end_date !== undefined) cleanUpdates.end_date = updates.end_date
+      if (updates.budget !== undefined) {
+        cleanUpdates.budget = updates.budget === 0 ? null : updates.budget
+      }
+      if (updates.technologies !== undefined) {
+        cleanUpdates.technologies = Array.isArray(updates.technologies) && updates.technologies.length > 0 
+          ? updates.technologies 
+          : null
+      }
+      if (updates.image_url !== undefined) {
+        cleanUpdates.image_url = updates.image_url?.trim() || null
+      }
+      
+      // Supprimer les champs en lecture seule
+      delete cleanUpdates.id
+      delete cleanUpdates.created_at
+      delete cleanUpdates.client_name
+      delete cleanUpdates.project_type
+      
+      console.log('Clean updates:', cleanUpdates)
+      
+      const { data, error } = await supabase
+        .from('projects')
+        .update(cleanUpdates)
+        .eq('id', id)
+        .select()
+        .single()
+      
+      if (error) {
+        console.error('Supabase update error:', error)
+        throw new Error(`Failed to update project: ${error.message}`)
+      }
+      
+      console.log('Project updated successfully:', data)
+      return data
+    } catch (err) {
+      console.error('Error updating project:', err)
+      throw err
     }
-    
-    return data
   },
 
   // Supprimer un projet
