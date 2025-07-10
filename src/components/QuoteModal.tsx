@@ -1,65 +1,85 @@
-import React, { useState } from 'react';
-import { X, Send, User, Mail, Phone, MessageSquare, Briefcase, DollarSign } from 'lucide-react';
-import { useLanguage } from '../hooks/useLanguage';
+// src/components/QuoteModal.tsx
+import React, { useState } from 'react'
+import { X, Send, User, Mail, Phone, MessageSquare, Briefcase, DollarSign } from 'lucide-react'
+import { useLanguage } from '../hooks/useLanguage'
+import { quotesService } from '../services/supabaseService'
+import type { QuoteInsert } from '../types/database'
 
 interface QuoteModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
 }
 
 export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => {
-  const { t } = useLanguage();
+  const { t } = useLanguage()
   
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     company: '',
-    projectType: '',
+    project_type: '',
     budget: '',
     message: '',
     timeline: ''
-  });
+  })
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
       [name]: value
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError(null)
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const quoteData: QuoteInsert = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        company: formData.company || undefined,
+        project_type: formData.project_type,
+        budget: formData.budget || undefined,
+        message: formData.message,
+        timeline: formData.timeline || undefined,
+        status: 'pending'
+      }
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      await quotesService.create(quoteData)
+      setIsSubmitted(true)
 
-    // Reset form after 3 seconds and close modal
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        projectType: '',
-        budget: '',
-        message: '',
-        timeline: ''
-      });
-      onClose();
-    }, 3000);
-  };
+      // Reset form after 3 seconds and close modal
+      setTimeout(() => {
+        setIsSubmitted(false)
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          project_type: '',
+          budget: '',
+          message: '',
+          timeline: ''
+        })
+        onClose()
+      }, 3000)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Une erreur est survenue')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -99,6 +119,12 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
 
         {/* Content */}
         <div className="p-6">
+          {error && (
+            <div className="mb-4 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
+              <p className="text-red-400 text-sm">{error}</p>
+            </div>
+          )}
+
           {isSubmitted ? (
             <div className="text-center py-8">
               <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -109,6 +135,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Reste du formulaire identique... */}
               {/* Personal Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 < div >
@@ -181,8 +208,8 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                     Project Type *
                   </label>
                   <select
-                    name="projectType"
-                    value={formData.projectType}
+                    name="project_type"
+                    value={formData.project_type}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-pink-500 focus:outline-none transition-colors"
@@ -277,5 +304,5 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
