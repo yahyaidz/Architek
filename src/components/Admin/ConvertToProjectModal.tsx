@@ -1,12 +1,12 @@
 // src/components/Admin/ConvertToProjectModal.tsx
 import React, { useState } from 'react'
 import { X, Save } from 'lucide-react'
-import type { Quote, Project } from '../../types/database'
+import type { Quote, Project, ProjectInsert } from '../../types/database' // Assurez-vous que ProjectInsert est importé
 
 interface ConvertToProjectModalProps {
   quote: Quote
   onClose: () => void
-  onConvert: (quote: Quote, projectData: Omit<Project, 'id' | 'created_at'>) => void
+  onConvert: (quote: Quote, projectData: Omit<ProjectInsert, 'id' | 'created_at'>) => void
 }
 
 export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({ 
@@ -14,43 +14,72 @@ export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({
   onClose, 
   onConvert 
 }) => {
-  const [formData, setFormData] = useState({
-    title: `${quote.project_type} for ${quote.name}`,
-    description: quote.message,
+  // Utiliser Omit<ProjectInsert, 'id' | 'created_at'> pour typer formData correctement
+  const [formData, setFormData] = useState<Omit<ProjectInsert, 'id' | 'created_at'>>({
+    // Fournir des valeurs par défaut ou utiliser des fallbacks au cas où quote.project_type ou quote.name seraient null/undefined
+    title: `${quote.project_type || 'New Project'} for ${quote.name}`,
+    description: quote.message || 'No description provided.',
     client_name: quote.name,
-    project_type: quote.project_type,
-    status: 'planning' as const,
-    start_date: new Date().toISOString().split('T')[0],
-    end_date: '',
-    budget: 0,
-    technologies: [] as string[],
-    image_url: ''
-  })
+    project_type: quote.project_type || 'other',
+    status: 'planning', // Statut par défaut pour un nouveau projet
+    start_date: new Date().toISOString().split('T')[0], // Date actuelle comme date de début par défaut
+    end_date: null, // Optionnel, initialiser à null
+    // Parser le budget de manière sécurisée. La colonne Supabase attend un nombre ou null.
+    // Supprime les caractères non numériques et convertit en entier, sinon null.
+    budget: quote.budget ? parseInt(quote.budget.replace(/[^0-9]/g, ''), 10) || null : null,
+    // technologies et image_url sont optionnels, initialiser à null
+    technologies: null, // Assurez-vous que quote.technologies n'est pas un champ pertinent ici, sinon adaptez
+    image_url: null
+  });
 
-  const [techInput, setTechInput] = useState('')
+  const [techInput, setTechInput] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    onConvert(quote, formData)
-    onClose()
-  }
+    e.preventDefault();
+    // Assurez-vous que les valeurs vides pour les dates sont converties en null si nécessaire
+    const finalProjectData = {
+      ...formData,
+      end_date: formData.end_date || null, // Convertir chaîne vide en null pour end_date
+      // Le budget et les technologies sont déjà gérés à l'initialisation pour être null si vides/invalides
+    };
+    onConvert(quote, finalProjectData);
+    onClose();
+  };
 
   const addTechnology = () => {
-    if (techInput.trim() && !formData.technologies.includes(techInput.trim())) {
+    if (techInput.trim() && !formData.technologies?.includes(techInput.trim())) {
       setFormData(prev => ({
         ...prev,
-        technologies: [...prev.technologies, techInput.trim()]
-      }))
-      setTechInput('')
+        // Si technologies est null, initialiser comme un tableau avant d'ajouter
+        technologies: [...(prev.technologies || []), techInput.trim()]
+      }));
+      setTechInput('');
     }
-  }
+  };
 
   const removeTechnology = (tech: string) => {
     setFormData(prev => ({
       ...prev,
-      technologies: prev.technologies.filter(t => t !== tech)
-    }))
-  }
+      technologies: prev.technologies?.filter(t => t !== tech) || null
+    }));
+  };
+
+  // Gestion des changements pour les champs optionnels afin qu'ils puissent être mis à null
+  const handleOptionalChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value === '' ? null : value // Convertir les champs vides en null
+    }));
+  };
+
+  // Gérer le changement pour les technologies (qui est un tableau)
+  const handleTechnologiesChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { value } = e.target;
+    // Ici, on met à jour techInput. La logique d'ajout se fait via addTechnology.
+    // Si la logique d'ajout directe était implémentée ici, il faudrait aussi gérer le passage à null.
+  };
+
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
@@ -70,25 +99,25 @@ export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            < div >
+            <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
                 Project Title *
               </label>
               <input
                 type="text"
-                value={formData.title}
+                value={formData.title || ''}
                 onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                 required
                 className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:border-blue-500 focus:outline-none"
               />
             </div>
-            < div >
+            <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
                 Client Name *
               </label>
               <input
                 type="text"
-                value={formData.client_name}
+                value={formData.client_name || ''}
                 onChange={(e) => setFormData(prev => ({ ...prev, client_name: e.target.value }))}
                 required
                 className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:border-blue-500 focus:outline-none"
@@ -97,12 +126,12 @@ export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({
           </div>
 
           {/* Description */}
-          < div >
+          <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">
               Description *
             </label>
             <textarea
-              value={formData.description}
+              value={formData.description || ''}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
               required
               rows={4}
@@ -112,7 +141,7 @@ export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({
 
           {/* Project Details */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            < div >
+            <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
                 Status
               </label>
@@ -128,47 +157,57 @@ export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({
                 <option value="paid">Paid</option>
               </select>
             </div>
-            < div >
+            <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
                 Start Date
               </label>
               <input
                 type="date"
-                value={formData.start_date}
-                onChange={(e) => setFormData(prev => ({ ...prev, start_date: e.target.value }))}
+                value={formData.start_date || ''}
+                onChange={handleOptionalChange} // Use handler that converts '' to null
+                name="start_date"
                 className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:border-blue-500 focus:outline-none"
               />
             </div>
-            < div >
+            <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
                 End Date
               </label>
               <input
                 type="date"
-                value={formData.end_date}
-                onChange={(e) => setFormData(prev => ({ ...prev, end_date: e.target.value }))}
+                value={formData.end_date || ''} // Display empty string if null for input field
+                onChange={handleOptionalChange} // Use handler that converts '' to null
+                name="end_date"
                 className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:border-blue-500 focus:outline-none"
               />
             </div>
           </div>
 
           {/* Budget */}
-          < div >
+          <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">
               Budget (€)
             </label>
             <input
               type="number"
-              value={formData.budget}
-              onChange={(e) => setFormData(prev => ({ ...prev, budget: Number(e.target.value) }))}
+              value={formData.budget === null ? '' : formData.budget || ''} // Display empty if null
+              onChange={(e) => {
+                const value = e.target.value;
+                setFormData(prev => ({
+                  ...prev,
+                  // Convert to number, set to null if empty or invalid
+                  budget: value === '' ? null : parseInt(value, 10) || null
+                }));
+              }}
               min="0"
               step="100"
+              placeholder="Enter budget or leave empty"
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:border-blue-500 focus:outline-none"
             />
           </div>
 
           {/* Technologies */}
-          < div >
+          <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">
               Technologies
             </label>
@@ -190,7 +229,7 @@ export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({
               </button>
             </div>
             <div className="flex flex-wrap gap-2">
-              {formData.technologies.map((tech) => (
+              {(formData.technologies || []).map((tech) => ( // Use || [] in case technologies is null
                 <span
                   key={tech}
                   className="px-2 py-1 bg-gray-600 text-white text-sm rounded flex items-center gap-1"
@@ -209,14 +248,14 @@ export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({
           </div>
 
           {/* Image URL */}
-          < div >
+          <div>
             <label className="block text-sm font-medium text-gray-400 mb-2">
               Project Image URL (optional)
             </label>
             <input
               type="url"
-              value={formData.image_url}
-              onChange={(e) => setFormData(prev => ({ ...prev, image_url: e.target.value }))}
+              value={formData.image_url || ''} // Display empty string if null for input field
+              onChange={(e) => setFormData(prev => ({ ...prev, image_url: e.target.value === '' ? null : e.target.value }))}
               placeholder="https://example.com/project-image.jpg"
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:border-blue-500 focus:outline-none"
             />
@@ -242,5 +281,5 @@ export const ConvertToProjectModal: React.FC< ConvertToProjectModalProps > = ({
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

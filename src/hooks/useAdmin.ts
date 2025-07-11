@@ -16,10 +16,12 @@ export const useAdmin = () => {
   const loadStats = async () => {
     try {
       setLoading(true)
+      setError(null) // Clear previous errors
       const data = await adminService.getDashboardStats()
       setStats(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error loading stats')
+      console.error("Failed to load stats:", err);
+      setError(err instanceof Error ? err.message : 'Error loading stats');
     } finally {
       setLoading(false)
     }
@@ -29,10 +31,12 @@ export const useAdmin = () => {
   const loadQuotes = async (filters: QuoteFilters = {}) => {
     try {
       setLoading(true)
+      setError(null) // Clear previous errors
       const data = await adminService.getQuotesWithFilters(filters)
       setQuotes(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error loading quotes')
+      console.error("Failed to load quotes:", err);
+      setError(err instanceof Error ? err.message : 'Error loading quotes');
     } finally {
       setLoading(false)
     }
@@ -42,10 +46,12 @@ export const useAdmin = () => {
   const loadProjects = async (filters: ProjectFilters = {}) => {
     try {
       setLoading(true)
+      setError(null) // Clear previous errors
       const data = await adminService.getProjectsWithFilters(filters)
       setProjects(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error loading projects')
+      console.error("Failed to load projects:", err);
+      setError(err instanceof Error ? err.message : 'Error loading projects');
     } finally {
       setLoading(false)
     }
@@ -54,70 +60,80 @@ export const useAdmin = () => {
   // Mettre à jour le statut d'une quote
   const updateQuoteStatus = async (id: string, status: Quote['status']) => {
     try {
-      await quotesService.updateStatus(id, status)
-      setQuotes(prev => prev.map(quote => 
+      setError(null); // Clear previous errors
+      await quotesService.updateStatus(id, status);
+      setQuotes(prev => prev.map(quote =>
         quote.id === id ? { ...quote, status } : quote
-      ))
-      // Recharger les stats
-      loadStats()
+      ));
+      // Recharger les stats pour refléter le changement
+      await loadStats();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error updating quote')
+      console.error(`Failed to update quote ${id} status:`, err);
+      setError(err instanceof Error ? err.message : 'Error updating quote');
     }
-  }
+  };
 
   // Mettre à jour un projet
   const updateProject = async (id: string, updates: Partial< Project >) => {
     try {
-      await projectsService.update(id, updates)
-      setProjects(prev => prev.map(project => 
+      setError(null); // Clear previous errors
+      await projectsService.update(id, updates);
+      setProjects(prev => prev.map(project =>
         project.id === id ? { ...project, ...updates } : project
-      ))
-      // Recharger les stats
-      loadStats()
+      ));
+      // Recharger les stats pour refléter le changement
+      await loadStats();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error updating project')
+      console.error(`Failed to update project ${id}:`, err);
+      setError(err instanceof Error ? err.message : 'Error updating project');
     }
-  }
+  };
 
-  // Convertir quote en projet - VERSION CORRIGÉE
+  // Convertir quote en projet
   const convertQuoteToProject = async (quote: Quote, projectData: Omit<ProjectInsert, 'id' | 'created_at'>) => {
     try {
-      setError(null)
-      console.log('Converting quote to project...', { quote: quote.id, projectData })
+      setError(null); // Clear previous errors before attempting conversion
+      console.log('Converting quote to project...', { quoteId: quote.id, projectData });
       
-      await adminService.convertQuoteToProject(quote.id, projectData)
+      // This function now relies on adminService to handle the transaction
+      await adminService.convertQuoteToProject(quote.id, projectData);
       
-      // Recharger toutes les données
+      // Recharger toutes les données après succès
       await Promise.all([
         loadQuotes(),
         loadProjects(),
         loadStats()
-      ])
+      ]);
       
-      console.log('Quote converted successfully')
+      console.log('Quote converted successfully');
+      // Optionally, you could return a success status or message here
     } catch (err) {
-      console.error('Error in convertQuoteToProject hook:', err)
-      const errorMessage = err instanceof Error ? err.message : 'Error converting quote'
-      setError(errorMessage)
-      throw err // Re-throw pour que le composant puisse aussi gérer l'erreur
+      // Error is already logged in adminService, but we catch it here to update the UI state
+      console.error('Error in convertQuoteToProject hook:', err);
+      const errorMessage = err instanceof Error ? err.message : 'Error converting quote';
+      setError(errorMessage);
+      // Re-throw the error so that the component calling this hook can also handle it if needed
+      throw err;
     }
-  }
+  };
 
   useEffect(() => {
+    // Fetch initial data when the component mounts
     const initializeData = async () => {
       try {
         await Promise.all([
           loadStats(),
           loadQuotes(),
           loadProjects()
-        ])
+        ]);
       } catch (err) {
-        console.error('Error initializing admin data:', err)
+        // Errors during initialization are already handled in individual load functions
+        console.error('Error initializing admin data:', err);
       }
-    }
+    };
 
-    initializeData()
-  }, [])
+    initializeData();
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   return {
     stats,
@@ -131,5 +147,5 @@ export const useAdmin = () => {
     updateQuoteStatus,
     updateProject,
     convertQuoteToProject
-  }
-}
+  };
+};
