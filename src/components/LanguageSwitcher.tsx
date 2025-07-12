@@ -1,3 +1,4 @@
+// src/components/LanguageSwitcher.tsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Globe, ChevronDown } from 'lucide-react';
 import { useLanguage, type Language } from '../hooks/useLanguage';
@@ -5,7 +6,7 @@ import { useLanguage, type Language } from '../hooks/useLanguage';
 export const LanguageSwitcher: React.FC = () => {
   const { t, currentLanguage, changeLanguage, isRTL } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef< HTMLDivElement >(null);
 
   const languages = [
     { code: 'en' as Language, name: t.english, flag: '🇺🇸' },

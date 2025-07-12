@@ -1,3 +1,4 @@
+// src/data/translations.ts
 export const translations = {
   en: {
     menu: 'MENU',
@@ -21,6 +22,7 @@ export const translations = {
     saasDevelopmentDesc: 'From concept to deployment, we create AI-powered SaaS solutions with machine learning capabilities, intelligent automation, and data-driven insights.',
     aiIntegration: 'AI INTEGRATION',
     aiIntegrationDesc: 'We integrate cutting-edge AI technologies including GPT models, machine learning algorithms, and intelligent automation to enhance your digital products.',
+    aiConsulting: 'AI CONSULTING',
     learnMore: 'LEARN',
     
     aboutTitle: 'About Architek',
@@ -35,10 +37,6 @@ export const translations = {
     followUs: 'FOLLOW US!',
     dontMiss: 'Don\'t miss the latest news!',
     
-    websiteCreation: 'Website Creation',
-    appDevelopment: 'App Development',
-    saasDevelopment: 'SaaS Development',
-    aiIntegration: 'AI Integration',
     clientWork: 'CLIENT WORK',
     digitalTips: 'DIGITAL TIPS',
     legalMentions: 'LEGAL MENTIONS',
@@ -76,6 +74,7 @@ export const translations = {
     saasDevelopmentDesc: 'من المفهوم إلى النشر، نقوم بإنشاء حلول SaaS مدعومة بالذكاء الاصطناعي مع قدرات التعلم الآلي والأتمتة الذكية والرؤى المدفوعة بالبيانات.',
     aiIntegration: 'تكامل الذكاء الاصطناعي',
     aiIntegrationDesc: 'نقوم بدمج أحدث تقنيات الذكاء الاصطناعي بما في ذلك نماذج GPT وخوارزميات التعلم الآلي والأتمتة الذكية لتعزيز منتجاتك الرقمية.',
+    aiConsulting: 'استشارات الذكاء الاصطناعي',
     learnMore: 'اعرف المزيد',
     
     aboutTitle: 'حول أركيتك',
@@ -90,10 +89,6 @@ export const translations = {
     followUs: 'تابعنا!',
     dontMiss: 'لا تفوت آخر الأخبار!',
     
-    websiteCreation: 'إنشاء المواقع',
-    appDevelopment: 'تطوير التطبيقات',
-    saasDevelopment: 'تطوير SaaS',
-    aiIntegration: 'تكامل الذكاء الاصطناعي',
     clientWork: 'أعمال العملاء',
     digitalTips: 'نصائح رقمية',
     legalMentions: 'الإشعارات القانونية',

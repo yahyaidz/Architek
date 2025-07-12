@@ -2,6 +2,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './components/Auth/AuthProvider'
+import { LanguageProvider } from './hooks/useLanguage'
 import { ProtectedRoute } from './components/Auth/ProtectedRoute'
 import { LoginPage } from './components/Auth/LoginPage'
 import { QuoteModal } from './components/QuoteModal'
@@ -35,21 +36,23 @@ function App() {
 
   return (
     < AuthProvider >
-      < Router >
-        < Routes >
-          <Route path="/" element={<HomePage />} />
-          <Route path="/website-creation" element={<WebsiteCreationPage />} />
-          <Route path="/app-development" element={<AppDevelopmentPage />} />
-          <Route path="/saas-development" element={<SaasDevelopmentPage />} />
-          <Route path="/ai-integration" element={<AIIntegrationPage />} />
-          <Route path="/admin/login" element={<LoginPage />} />
-          <Route path="/admin" element={
-            < ProtectedRoute >
-              <AdminDashboard />
-            </ProtectedRoute>
-          } />
-        </Routes>
-      </Router>
+      < LanguageProvider >
+        < Router >
+          < Routes >
+            <Route path="/" element={<HomePage />} />
+            <Route path="/website-creation" element={<WebsiteCreationPage />} />
+            <Route path="/app-development" element={<AppDevelopmentPage />} />
+            <Route path="/saas-development" element={<SaasDevelopmentPage />} />
+            <Route path="/ai-integration" element={<AIIntegrationPage />} />
+            <Route path="/admin/login" element={<LoginPage />} />
+            <Route path="/admin" element={
+              < ProtectedRoute >
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </Router>
+      </LanguageProvider>
     </AuthProvider>
   )
 }
