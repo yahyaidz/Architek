@@ -11,7 +11,7 @@ interface QuoteModalProps {
 }
 
 export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => {
-  const { t } = useLanguage()
+  const { t, isRTL } = useLanguage()
   
   const [formData, setFormData] = useState({
     name: '',
@@ -90,10 +90,10 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
       />
       
       {/* Modal */}
-      <div className="relative bg-gray-900 rounded-2xl border border-gray-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className={`relative bg-gray-900 rounded-2xl border border-gray-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto ${isRTL ? 'rtl' : 'ltr'}`}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-800">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+          <h2 className={`text-2xl font-bold bg-gradient-to-r from-pink-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent ${isRTL ? 'font-arabic' : ''}`}>
             Get Your Quote
           </h2>
           <button
@@ -108,10 +108,10 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
         <div className="bg-gradient-to-r from-emerald-900/40 via-cyan-900/40 to-emerald-900/40 border-b border-emerald-500/30 px-6 py-3">
           <div className="flex items-center justify-center gap-2 text-emerald-300">
             <span className="text-lg">✅</span>
-            <span className="text-sm font-medium">{t.satisfactionGuarantee}</span>
+            <span className={`text-sm font-medium ${isRTL ? 'font-arabic' : ''}`}>{t.satisfactionGuarantee}</span>
           </div>
           <div className="text-center mt-1">
-            <p className="text-emerald-400/80 text-xs">
+            <p className={`text-emerald-400/80 text-xs ${isRTL ? 'font-arabic' : ''}`}>
               {t.guaranteeDescription}
             </p>
           </div>
@@ -121,7 +121,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
         <div className="p-6">
           {error && (
             <div className="mb-4 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
-              <p className="text-red-400 text-sm">{error}</p>
+              <p className={`text-red-400 text-sm ${isRTL ? 'font-arabic' : ''}`}>{error}</p>
             </div>
           )}
 
@@ -130,8 +130,8 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
               <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Send className="text-white" size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Quote Request Sent!</h3>
-              <p className="text-gray-300">We'll get back to you within 24 hours with a detailed proposal.</p>
+              <h3 className={`text-xl font-bold text-white mb-2 ${isRTL ? 'font-arabic' : ''}`}>Quote Request Sent!</h3>
+              <p className={`text-gray-300 ${isRTL ? 'font-arabic' : ''}`}>We'll get back to you within 24 hours with a detailed proposal.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -139,7 +139,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
               {/* Personal Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 < div >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
                     <User size={16} className="inline mr-2" />
                     Full Name *
                   </label>
@@ -149,12 +149,12 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors"
+                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors ${isRTL ? 'font-arabic text-right' : ''}`}
                     placeholder="John Doe"
                   />
                 </div>
                 < div >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
                     <Mail size={16} className="inline mr-2" />
                     Email Address *
                   </label>
@@ -164,7 +164,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors"
+                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors ${isRTL ? 'font-arabic text-right' : ''}`}
                     placeholder="john@example.com"
                   />
                 </div>
@@ -172,7 +172,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 < div >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
                     <Phone size={16} className="inline mr-2" />
                     Phone Number
                   </label>
@@ -181,12 +181,12 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors"
+                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors ${isRTL ? 'font-arabic text-right' : ''}`}
                     placeholder="+33 1 23 45 67 89"
                   />
                 </div>
                 < div >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
                     <Briefcase size={16} className="inline mr-2" />
                     Company
                   </label>
@@ -195,7 +195,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors"
+                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors ${isRTL ? 'font-arabic text-right' : ''}`}
                     placeholder="Your Company"
                   />
                 </div>
@@ -204,7 +204,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
               {/* Project Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 < div >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
                     Project Type *
                   </label>
                   <select
@@ -212,7 +212,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                     value={formData.project_type}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-pink-500 focus:outline-none transition-colors"
+                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-pink-500 focus:outline-none transition-colors ${isRTL ? 'font-arabic text-right' : ''}`}
                   >
                     <option value="">Select a service</option>
                     <option value="website">Website Creation</option>
@@ -224,7 +224,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                   </select>
                 </div>
                 < div >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
                     <DollarSign size={16} className="inline mr-2" />
                     Budget Range
                   </label>
@@ -232,7 +232,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-pink-500 focus:outline-none transition-colors"
+                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-pink-500 focus:outline-none transition-colors ${isRTL ? 'font-arabic text-right' : ''}`}
                   >
                     <option value="">Select budget range</option>
                     <option value="5k-10k">€5,000 - €10,000</option>
@@ -246,14 +246,14 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
               </div>
 
               < div >
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
                   Timeline
                 </label>
                 <select
                   name="timeline"
                   value={formData.timeline}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-pink-500 focus:outline-none transition-colors"
+                  className={`w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-pink-500 focus:outline-none transition-colors ${isRTL ? 'font-arabic text-right' : ''}`}
                 >
                   <option value="">Select timeline</option>
                   <option value="asap">ASAP</option>
@@ -266,7 +266,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
               </div>
 
               < div >
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'font-arabic text-right' : ''}`}>
                   <MessageSquare size={16} className="inline mr-2" />
                   Project Description *
                 </label>
@@ -276,7 +276,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
                   onChange={handleInputChange}
                   required
                   rows={4}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors resize-none"
+                  className={`w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-pink-500 focus:outline-none transition-colors resize-none ${isRTL ? 'font-arabic text-right' : ''}`}
                   placeholder="Tell us about your project, goals, and any specific requirements..."
                 />
               </div>
@@ -285,7 +285,7 @@ export const QuoteModal: React.FC< QuoteModalProps > = ({ isOpen, onClose }) => 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 via-cyan-500 to-purple-600 hover:from-emerald-600 hover:via-cyan-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className={`w-full px-6 py-3 bg-gradient-to-r from-emerald-500 via-cyan-500 to-purple-600 hover:from-emerald-600 hover:via-cyan-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${isRTL ? 'font-arabic' : ''}`}
               >
                 {isSubmitting ? (
                   <>

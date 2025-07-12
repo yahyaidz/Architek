@@ -3,7 +3,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export const About: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
 
   return (
@@ -23,14 +23,14 @@ export const About: React.FC = () => {
       <div className="container mx-auto px-4 relative z-20">
         <div
           ref={elementRef}
-          className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${
+          className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ${isRTL ? 'rtl' : 'ltr'} ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 md:mb-8 px-2">
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 md:mb-8 px-2 ${isRTL ? 'font-arabic' : ''}`}>
             About Architek
           </h2>
-          <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-10 md:mb-12 px-2 max-w-3xl mx-auto">
+          <p className={`text-gray-300 text-base md:text-lg leading-relaxed mb-10 md:mb-12 px-2 max-w-3xl mx-auto ${isRTL ? 'font-arabic' : ''}`}>
             {t.aboutDescription}
           </p>
 
@@ -43,7 +43,7 @@ export const About: React.FC = () => {
               <h3 className="text-xl md:text-2xl font-bold text-emerald-400 mb-3">
                 {t.satisfactionGuarantee}
               </h3>
-              <p className="text-gray-300 text-sm md:text-base">
+              <p className={`text-gray-300 text-sm md:text-base ${isRTL ? 'font-arabic' : ''}`}>
                 {t.guaranteeDescription}
               </p>
             </div>
@@ -53,15 +53,15 @@ export const About: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 px-2">
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-pink-500/50 transition-all">
               <div className="text-2xl md:text-3xl font-bold text-pink-400 mb-2">150+</div>
-              <div className="text-gray-300 text-sm md:text-base">Active Clients</div>
+              <div className={`text-gray-300 text-sm md:text-base ${isRTL ? 'font-arabic' : ''}`}>Active Clients</div>
             </div>
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-cyan-500/50 transition-all">
               <div className="text-2xl md:text-3xl font-bold text-cyan-400 mb-2">5+</div>
-              <div className="text-gray-300 text-sm md:text-base">Years Experience</div>
+              <div className={`text-gray-300 text-sm md:text-base ${isRTL ? 'font-arabic' : ''}`}>Years Experience</div>
             </div>
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-800 hover:border-emerald-500/50 transition-all sm:col-span-1">
               <div className="text-2xl md:text-3xl font-bold text-emerald-400 mb-2">AI</div>
-              <div className="text-gray-300 text-sm md:text-base">Powered</div>
+              <div className={`text-gray-300 text-sm md:text-base ${isRTL ? 'font-arabic' : ''}`}>Powered</div>
             </div>
           </div>
         </div>

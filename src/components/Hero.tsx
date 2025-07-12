@@ -7,7 +7,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onGetQuote }) => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
 
   // Memoize code strings to prevent re-creation on every render
@@ -273,28 +273,28 @@ export const Hero: React.FC<HeroProps> = ({ onGetQuote }) => {
       {/* Main content */}
       <div
         ref={elementRef}
-        className={`container mx-auto px-4 text-center relative z-10 transform transition-all duration-1000 ${
+        className={`container mx-auto px-4 text-center relative z-10 transform transition-all duration-1000 ${isRTL ? 'rtl' : 'ltr'} ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}
       >
         <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
           {/* Enhanced title with better gradient */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent font-mono tracking-tight leading-tight drop-shadow-2xl">
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent ${isRTL ? 'font-arabic' : 'font-mono'} tracking-tight leading-tight drop-shadow-2xl`}>
             {t.heroTitle}
           </h1>
 
-          <div className="text-lg sm:text-xl md:text-2xl bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent font-light tracking-widest drop-shadow-lg">
+          <div className={`text-lg sm:text-xl md:text-2xl bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent font-light ${isRTL ? 'font-arabic' : 'tracking-widest'} drop-shadow-lg`}>
             {t.heroSubtitle}
           </div>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto px-2 sm:px-4 leading-relaxed drop-shadow-lg">
+          <p className={`text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto px-2 sm:px-4 leading-relaxed drop-shadow-lg ${isRTL ? 'font-arabic' : ''}`}>
             {t.heroDescription}
           </p>
 
           {/* Satisfaction Guarantee Badge */}
           <div className="flex justify-center pt-4">
             <div className="bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-emerald-500/20 border border-emerald-400/30 rounded-full px-4 py-2 backdrop-blur-sm">
-              <p className="text-emerald-300 text-sm font-medium">
+              <p className={`text-emerald-300 text-sm font-medium ${isRTL ? 'font-arabic' : ''}`}>
                 ✅ {t.satisfactionGuarantee}
               </p>
             </div>
@@ -303,7 +303,7 @@ export const Hero: React.FC<HeroProps> = ({ onGetQuote }) => {
           <div className="pt-6 md:pt-8">
             <button 
               onClick={onGetQuote}
-              className="px-6 py-3 sm:px-8 sm:py-3 md:px-10 text-base sm:text-lg md:text-xl bg-gradient-to-r from-white via-emerald-100 to-cyan-100 text-black hover:from-emerald-400 hover:via-cyan-400 hover:to-emerald-400 hover:text-black font-medium transition-all duration-300 rounded-sm tracking-wide touch-manipulation shadow-2xl hover:shadow-emerald-400/25 transform hover:scale-105"
+              className={`px-6 py-3 sm:px-8 sm:py-3 md:px-10 text-base sm:text-lg md:text-xl bg-gradient-to-r from-white via-emerald-100 to-cyan-100 text-black hover:from-emerald-400 hover:via-cyan-400 hover:to-emerald-400 hover:text-black font-medium transition-all duration-300 rounded-sm ${isRTL ? 'font-arabic' : 'tracking-wide'} touch-manipulation shadow-2xl hover:shadow-emerald-400/25 transform hover:scale-105`}
             >
               {t.getQuote}
             </button>

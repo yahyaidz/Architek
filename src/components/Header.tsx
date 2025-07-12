@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface HeaderProps {
   onGetQuote: () => void;
@@ -8,7 +9,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev);
@@ -19,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
   }, []);
   
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-pink-500/20">
+    <header className={`fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-pink-500/20 ${isRTL ? 'rtl' : 'ltr'}`}>
       <div className="container mx-auto px-4 py-3 md:py-4">
         <div className="flex items-center justify-between">
           {/* Logo - optimized for mobile */}
@@ -31,22 +32,23 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-            <a href="#home" className="text-white hover:text-pink-400 transition-colors text-sm lg:text-base">
+            <a href="#home" className={`text-white hover:text-pink-400 transition-colors text-sm lg:text-base ${isRTL ? 'font-arabic' : ''}`}>
               {t.home}
             </a>
-            <a href="#services" className="text-white hover:text-pink-400 transition-colors text-sm lg:text-base">
+            <a href="#services" className={`text-white hover:text-pink-400 transition-colors text-sm lg:text-base ${isRTL ? 'font-arabic' : ''}`}>
               {t.services}
             </a>
-            <a href="#about" className="text-white hover:text-pink-400 transition-colors text-sm lg:text-base">
+            <a href="#about" className={`text-white hover:text-pink-400 transition-colors text-sm lg:text-base ${isRTL ? 'font-arabic' : ''}`}>
               {t.about}
             </a>
-            <a href="#contact" className="text-white hover:text-pink-400 transition-colors text-sm lg:text-base">
+            <a href="#contact" className={`text-white hover:text-pink-400 transition-colors text-sm lg:text-base ${isRTL ? 'font-arabic' : ''}`}>
               {t.contact}
             </a>
           </nav>
           
           {/* Desktop Contact */}
           <div className="hidden lg:flex items-center gap-4">
+            <LanguageSwitcher />
             <div className="flex items-center gap-2 text-white text-sm">
               <Phone size={16} />
               <span>{t.phone}</span>
@@ -61,9 +63,10 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
           
           {/* Mobile CTA + Menu Button */}
           <div className="flex items-center gap-3 md:hidden">
+            <LanguageSwitcher />
             <button 
               onClick={onGetQuote}
-              className="px-3 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-xs touch-manipulation"
+              className={`px-3 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-xs touch-manipulation ${isRTL ? 'font-arabic' : ''}`}
             >
               {t.getQuote}
             </button>
@@ -78,9 +81,10 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
 
           {/* Tablet CTA */}
           <div className="hidden md:flex lg:hidden">
+            <LanguageSwitcher />
             <button 
               onClick={onGetQuote}
-              className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-sm touch-manipulation"
+              className={`px-4 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-lg font-medium text-sm touch-manipulation ${isRTL ? 'font-arabic' : ''}`}
             >
               {t.getQuote}
             </button>
@@ -93,33 +97,33 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
             <nav className="flex flex-col gap-4 mt-4">
               <a 
                 href="#home" 
-                className="text-white hover:text-pink-400 transition-colors py-2 touch-manipulation"
+                className={`text-white hover:text-pink-400 transition-colors py-2 touch-manipulation ${isRTL ? 'font-arabic text-right' : ''}`}
                 onClick={closeMenu}
               >
                 {t.home}
               </a>
               <a 
                 href="#services" 
-                className="text-white hover:text-pink-400 transition-colors py-2 touch-manipulation"
+                className={`text-white hover:text-pink-400 transition-colors py-2 touch-manipulation ${isRTL ? 'font-arabic text-right' : ''}`}
                 onClick={closeMenu}
               >
                 {t.services}
               </a>
               <a 
                 href="#about" 
-                className="text-white hover:text-pink-400 transition-colors py-2 touch-manipulation"
+                className={`text-white hover:text-pink-400 transition-colors py-2 touch-manipulation ${isRTL ? 'font-arabic text-right' : ''}`}
                 onClick={closeMenu}
               >
                 {t.about}
               </a>
               <a 
                 href="#contact" 
-                className="text-white hover:text-pink-400 transition-colors py-2 touch-manipulation"
+                className={`text-white hover:text-pink-400 transition-colors py-2 touch-manipulation ${isRTL ? 'font-arabic text-right' : ''}`}
                 onClick={closeMenu}
               >
                 {t.contact}
               </a>
-              <div className="flex items-center gap-2 text-white text-sm mt-2 py-2">
+              <div className={`flex items-center gap-2 text-white text-sm mt-2 py-2 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
                 <Phone size={16} />
                 <span>{t.phone}</span>
               </div>

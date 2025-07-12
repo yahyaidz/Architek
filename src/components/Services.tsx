@@ -9,7 +9,7 @@ interface ServicesProps {
 }
 
 export const Services: React.FC<ServicesProps> = ({ onGetQuote }) => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const { elementRef, isVisible } = useScrollAnimation();
 
   // Memoize services data to prevent re-creation
@@ -93,14 +93,14 @@ export const Services: React.FC<ServicesProps> = ({ onGetQuote }) => {
       <div className="container mx-auto px-4 relative z-20">
         <div
           ref={elementRef}
-          className={`text-center mb-12 md:mb-16 transform transition-all duration-1000 ${
+          className={`text-center mb-12 md:mb-16 transform transition-all duration-1000 ${isRTL ? 'rtl' : 'ltr'} ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6">
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 ${isRTL ? 'font-arabic' : ''}`}>
             {t.services}
           </h2>
-          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto px-2 sm:px-4 leading-relaxed">
+          <p className={`text-gray-300 text-base md:text-lg max-w-2xl mx-auto px-2 sm:px-4 leading-relaxed ${isRTL ? 'font-arabic' : ''}`}>
             {t.aboutDescription}
           </p>
         </div>
