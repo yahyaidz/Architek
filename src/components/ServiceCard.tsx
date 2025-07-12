@@ -1,3 +1,4 @@
+// src/components/ServiceCard.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -12,7 +13,7 @@ interface ServiceCardProps {
   onGetQuote: () => void;
 }
 
-export const ServiceCard: React.FC<ServiceCardProps> = ({
+export const ServiceCard: React.FC< ServiceCardProps > = ({
   title,
   description,
   icon,
@@ -60,16 +61,19 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           {description}
         </p>
 
-        <div className={`flex gap-2 md:gap-3 mt-auto pt-4 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}>
+        {/* Boutons centrés pour les deux langues */}
+        <div className={`flex gap-2 md:gap-3 mt-auto pt-4 justify-center ${
+          isRTL ? 'flex-row-reverse' : 'flex-row'
+        }`}>
           <button 
             onClick={() => navigate(getServiceRoute(title))}
-            className={`px-3 py-2 md:px-4 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap ${isRTL ? 'font-arabic' : ''}`}
+            className={`px-3 py-2 md:px-4 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap max-w-[120px] ${isRTL ? 'font-arabic' : ''}`}
           >
             {t.learnMore}
           </button>
           <button 
             onClick={onGetQuote}
-            className={`px-3 py-2 md:px-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap ${isRTL ? 'font-arabic' : ''}`}
+            className={`px-3 py-2 md:px-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg transition-all font-medium text-xs md:text-sm touch-manipulation flex-1 whitespace-nowrap max-w-[120px] ${isRTL ? 'font-arabic' : ''}`}
           >
             {t.getQuote}
           </button>
