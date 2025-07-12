@@ -106,7 +106,7 @@ export const Services: React.FC<ServicesProps> = ({ onGetQuote }) => {
         </div>
 
         {/* Services grid with proper spacing and alignment */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16 max-w-7xl mx-auto">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16 max-w-7xl mx-auto ${isRTL ? 'rtl' : ''}`}>
           {services.map((service, index) => (
             <ServiceCard
               key={index}
@@ -117,7 +117,7 @@ export const Services: React.FC<ServicesProps> = ({ onGetQuote }) => {
         </div>
 
         {/* Tech icons section with original brand colors for both icons and text */}
-        <div className="grid grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-2xl mx-auto">
+        <div className={`grid grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-2xl mx-auto ${isRTL ? 'rtl' : ''}`}>
           {techIcons.map(({ icon: Icon, label, iconHoverColor, textHoverColor, bgHover }, index) => (
             <div 
               key={index}

@@ -30,8 +30,8 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
             </div>
           </div>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          {/* Desktop Navigation - Fixed RTL layout */}
+          <nav className={`hidden md:flex items-center gap-6 lg:gap-8 ${isRTL ? '' : ''}`}>
             <a href="#home" className={`text-white hover:text-pink-400 transition-colors text-sm lg:text-base ${isRTL ? 'font-arabic' : ''}`}>
               {t.home}
             </a>
@@ -47,9 +47,9 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
           </nav>
           
           {/* Desktop Contact */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className={`hidden lg:flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <LanguageSwitcher />
-            <div className="flex items-center gap-2 text-white text-sm">
+            <div className={`flex items-center gap-2 text-white text-sm ${isRTL ? 'flex-row-reverse' : ''}`}>
               <Phone size={16} />
               <span>{t.phone}</span>
             </div>
@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
           </div>
           
           {/* Mobile CTA + Menu Button */}
-          <div className="flex items-center gap-3 md:hidden">
+          <div className={`flex items-center gap-3 md:hidden ${isRTL ? 'flex-row-reverse' : ''}`}>
             <LanguageSwitcher />
             <button 
               onClick={onGetQuote}
@@ -80,7 +80,7 @@ export const Header: React.FC<HeaderProps> = ({ onGetQuote }) => {
           </div>
 
           {/* Tablet CTA */}
-          <div className="hidden md:flex lg:hidden">
+          <div className={`hidden md:flex lg:hidden items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <LanguageSwitcher />
             <button 
               onClick={onGetQuote}
